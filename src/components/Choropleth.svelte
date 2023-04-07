@@ -91,7 +91,9 @@
 {#if domain && colorScale}
     <div class = "scale">
         <p><strong style:font-size="14px">{scaleLabel}</strong></p>
-        <div style:background-image="linear-gradient(to right, {colorScale(domain[0])}, {colorScale(domain[1])})"></div>
+        <div 
+            style:background-image="linear-gradient(to right, {colorScale(domain[0])}, {colorScale((domain[1] - domain[0]) * 0.25)}, {colorScale((domain[1] - domain[0]) * 0.5)}, {colorScale((domain[1] - domain[0]) * 0.75)},{colorScale(domain[1])})"
+        ></div>
         <p style:font-size="10px">
             <span style:float="left">{formatDomain(domain[0])}%</span>
             <span style:float="right">{formatDomain(domain[1])}%</span>
@@ -108,8 +110,13 @@
     }
 
     .scale div{
-        width: 160px;
+        width: max(160px, 100%);
         height: 20px;
         margin: 4px 0;
+        opacity: 0.9;
+    }
+    
+    .scale p{
+        width: max(160px, 100%);
     }
 </style>

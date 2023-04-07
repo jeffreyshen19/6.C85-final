@@ -15,7 +15,7 @@
 </script>
 
 <Basemap bind:L={L} bind:map={map}/>
-<Choropleth 
+<!-- <Choropleth 
     {L} 
     {map} 
     data={departments} 
@@ -24,6 +24,16 @@
     formatDomain={(d) => (100 * d).toFixed(2)}
     scaleLabel="% Tree Cover (2000)"
     renderTooltip = {(d) => `<h1>${d.department_name}, ${d.country}</h1><p>Tree Cover (2000): ${(d.COVER_2000 / d.TOTAL_SQUA * 100).toFixed(2)}%</p>`}
+/> -->
+<Choropleth 
+    {L} 
+    {map} 
+    data={departments} 
+    colorScale={d3.scaleSequential(d3.interpolateReds)}
+    f={(d) => d.LOSS_10_YE / d.TOTAL_SQUA}
+    formatDomain={(d) => (100 * d).toFixed(2)}
+    scaleLabel="Forest Cover Loss (2012-2021)"
+    renderTooltip = {(d) => `<h1>${d.department_name}, ${d.country}</h1><p>Forest Cover Loss (2012-2021): ${(d.LOSS_10_YE / d.TOTAL_SQUA * 100).toFixed(2)}%</p>`}
 />
 
 <style>
