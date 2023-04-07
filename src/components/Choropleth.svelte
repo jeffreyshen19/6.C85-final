@@ -1,0 +1,37 @@
+<script>
+    import "leaflet/dist/leaflet.css";
+    import {onMount} from "svelte";
+
+    let L;
+    let map;
+
+    onMount(async () => {
+
+        const l = await import('leaflet');
+        L = l.default;
+
+        map = L.map('map', { 
+            zoomControl: false,
+            attributionControl: false,
+            dragging: false,
+            doubleClickZoom: false,
+            boxZoom: false
+        }).setView([15, -89], 6);
+
+        var osm = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+            subdomains: 'abcd',
+            maxZoom: 20
+        }).addTo( map );
+
+    });
+</script>
+
+<div id = "map"></div>
+
+<style>
+    #map { 
+        height: 100vh;
+        width: 100vw; 
+    }
+</style>

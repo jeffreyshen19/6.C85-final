@@ -1,2 +1,13 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<style>
+    :global(body){
+        padding: 0;
+        margin: 0;
+    }
+
+</style>
+
+<script>
+    import Choropleth from "../components/Choropleth.svelte";
+</script>
+
+<Choropleth/>
