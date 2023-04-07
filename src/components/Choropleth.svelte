@@ -4,8 +4,12 @@
     export let L;
     export let map;
     export let data;
+    export let formatDomain;
+    export let scaleLabel;
     export let colorScale;
-    $: if(colorScale) colorScale = colorScale.domain(getDomain(data.features));
+    let domain; 
+    $: if(data) domain = getDomain(data.features);
+    $: if(colorScale && data) colorScale = colorScale.domain(domain);
 
     export let f; // a method returning the attribute to visualize on the choropleth
     export let renderTooltip; // a method returning the html of the tooltip 
@@ -83,3 +87,29 @@
 <Tooltip hidden={hovered==null} position={tooltipPosition}>
     {@html renderTooltip(hovered)}
 </Tooltip>
+
+{#if domain && colorScale}
+    <div class = "scale">
+        <p><strong style:font-size="14px">{scaleLabel}</strong></p>
+        <div style:background-image="linear-gradient(to right, {colorScale(domain[0])}, {colorScale(domain[1])})"></div>
+        <p style:font-size="10px">
+            <span style:float="left">{formatDomain(domain[0])}%</span>
+            <span style:float="right">{formatDomain(domain[1])}%</span>
+        </p>
+    </div>
+{/if}
+
+<style>
+    .scale{
+        position: absolute;
+        z-index: 1000;
+        bottom: 10px;
+        left: 10px;
+    }
+
+    .scale div{
+        width: 160px;
+        height: 20px;
+        margin: 4px 0;
+    }
+</style>

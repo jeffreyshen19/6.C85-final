@@ -21,6 +21,8 @@
     data={departments} 
     colorScale={d3.scaleSequential(d3.interpolateGreens)}
     f={(d) => d.COVER_2000 / d.TOTAL_SQUA}
+    formatDomain={(d) => (100 * d).toFixed(2)}
+    scaleLabel="% Tree Cover (2000)"
     renderTooltip = {(d) => `<h1>${d.department_name}, ${d.country}</h1><p>Tree Cover (2000): ${(d.COVER_2000 / d.TOTAL_SQUA * 100).toFixed(2)}%</p>`}
 />
 
