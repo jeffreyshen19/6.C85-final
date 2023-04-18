@@ -8,24 +8,71 @@
     import Choropleth from "../components/Choropleth.svelte";
     import Basemap from "../components/Basemap.svelte";
     import departments from "../geojson/departments.json";
+    import Scroller from "@sveltejs/svelte-scroller";
     import * as d3 from "d3";
 
     export let L; 
     export let map; 
+
+    let count, index, offset, progress;
+    let width, height;
 </script>
 
-<Basemap bind:L={L} bind:map={map}/>
+
+<Scroller
+    top={0.0}
+    bottom={1}
+    threshold={0.5}
+    bind:count
+    bind:index
+    bind:offset
+    bind:progress
+>
+    <div
+        class="background"
+        slot="background"
+        bind:clientWidth={width}
+        bind:clientHeight={height}
+    >
+        <div class="progress-bars">
+            <p>current section: <strong>{index + 1}/{count}</strong></p>
+            <progress value={count ? (index + 1) / count : 0} />
+
+            <p>offset in current section</p>
+            <progress value={offset || 0} />
+
+            <p>total progress</p>
+            <progress value={progress || 0} />
+        </div>
+
+
+        <Basemap bind:L={L} bind:map={map}/>
+        <Choropleth 
+            visible={index == 1}
+            {L} 
+            {map} 
+            data={departments} 
+            colorScale={d3.scaleSequential(d3.interpolateGreens)}
+            f={(d) => d.COVER_2000 / d.TOTAL_SQUA}
+            formatDomain={(d) => (100 * d).toFixed(2)}
+            scaleLabel="% Tree Cover (2000)"
+            renderTooltip = {(d) => `<h1>${d.department_name}, ${d.country}</h1><p>Tree Cover (2000): ${(d.COVER_2000 / d.TOTAL_SQUA * 100).toFixed(2)}%</p>`}
+        />
+    </div>
+  
+    <div class="foreground" slot="foreground">
+        <section>This is the first section.</section>
+        <section>This is the second section.</section>
+        <section>This is the third section.</section>
+        <section>This is the fourth section.</section>
+        <section>This is the fifth section.</section>
+        <section>This is the sixth section.</section>
+    </div>
+</Scroller>
+
+
+
 <!-- <Choropleth 
-    {L} 
-    {map} 
-    data={departments} 
-    colorScale={d3.scaleSequential(d3.interpolateGreens)}
-    f={(d) => d.COVER_2000 / d.TOTAL_SQUA}
-    formatDomain={(d) => (100 * d).toFixed(2)}
-    scaleLabel="% Tree Cover (2000)"
-    renderTooltip = {(d) => `<h1>${d.department_name}, ${d.country}</h1><p>Tree Cover (2000): ${(d.COVER_2000 / d.TOTAL_SQUA * 100).toFixed(2)}%</p>`}
-/> -->
-<Choropleth 
     {L} 
     {map} 
     data={departments} 
@@ -34,7 +81,7 @@
     formatDomain={(d) => (100 * d).toFixed(2)}
     scaleLabel="Forest Cover Loss (2012-2021)"
     renderTooltip = {(d) => `<h1>${d.department_name}, ${d.country}</h1><p>Forest Cover Loss (2012-2021): ${(d.LOSS_10_YE / d.TOTAL_SQUA * 100).toFixed(2)}%</p>`}
-/>
+/> -->
 
 <style>
     :global(body){
@@ -48,5 +95,38 @@
 
     :global(p){
         font-family: 'IBM Plex Sans', sans-serif;
+    }
+
+    .background {
+        width: 100vw;
+        height: 100vh;
+        position: relative;
+    }
+  
+    .foreground {
+      width: 50%;
+      /* margin: 0 auto; */
+      height: auto;
+      position: relative;
+      outline: red solid 3px;
+    }
+  
+    .progress-bars {
+      position: absolute;
+      background: rgba(170, 51, 120, 0.2) /*  40% opaque */;
+      visibility: visible;
+      z-index: 1000;
+    }
+  
+    section {
+      height: 80vh;
+      background-color: rgba(0, 0, 0, 0.2); /* 20% opaque */
+      /* color: white; */
+      outline: magenta solid 3px;
+      text-align: center;
+      max-width: 750px; /* adjust at will */
+      color: black;
+      padding: 1em;
+      margin: 0 0 2em 0;
     }
 </style>

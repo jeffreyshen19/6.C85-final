@@ -1,5 +1,6 @@
 <script>
     import Tooltip from "../components/Tooltip.svelte";
+    import { onDestroy } from "svelte";
 
     export let L;
     export let map;
@@ -13,10 +14,12 @@
 
     export let f; // a method returning the attribute to visualize on the choropleth
     export let renderTooltip; // a method returning the html of the tooltip 
+    export let visible;
 
     let choroplethLayer;
     let tooltipPosition; 
     let hovered;
+    
 
     function getDomain(data){
         let min, max;
@@ -39,16 +42,30 @@
                 return {
                     fillColor: colorScale(f(feature.properties)),
                     weight: 1,
-                    opacity: 1,
+                    opacity: 0,
                     color: 'white',
-                    fillOpacity: 0.9,
-                    transition: "2s all"
+                    fillOpacity: 0
                 };
             },
             onEachFeature: onEachFeature
         }).addTo(map);
 
-        map.fitBounds(choroplethLayer.getBounds());
+        // map.fitBounds(choroplethLayer.getBounds());
+    }
+
+    $: if(choroplethLayer) {
+        if(visible){
+            choroplethLayer.setStyle({
+                opacity: 1,
+                fillOpacity: 0.9
+            })
+        } 
+        else {
+            choroplethLayer.setStyle({
+                opacity: 0,
+                fillOpacity: 0
+            })
+        }
     }
 
     function highlightFeature(e) {
@@ -102,6 +119,10 @@
 {/if}
 
 <style>
+    :global(.leaflet-interactive){
+        transition: fill-opacity 1s, stroke-opacity 1s;
+    }
+
     .scale{
         position: absolute;
         z-index: 1000;
