@@ -7,12 +7,13 @@
 <script>
     import Choropleth from "../components/Choropleth.svelte";
     import Basemap from "../components/Basemap.svelte";
+    import Raster from "../components/Raster.svelte";
     import departments from "../geojson/departments.json";
     import Scroller from "@sveltejs/svelte-scroller";
     import * as d3 from "d3";
 
-    export let L; 
-    export let map; 
+    let L; 
+    let map; 
 
     let count, index, offset, progress;
     let width, height;
@@ -47,8 +48,15 @@
 
 
         <Basemap bind:L={L} bind:map={map}/>
-        <Choropleth 
+        <Raster
+            {L}
+            {map}
+            url="/raster/treecover2000.png"
             visible={index == 1}
+            bounds={[[17.8292499999999983, -92.25], [12.971, -83.14575]]}
+        />
+        <Choropleth 
+            visible={index == 2}
             {L} 
             {map} 
             data={departments} 

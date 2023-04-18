@@ -1,6 +1,5 @@
 <script>
     import Tooltip from "../components/Tooltip.svelte";
-    import { onDestroy } from "svelte";
 
     export let L;
     export let map;
@@ -19,7 +18,6 @@
     let choroplethLayer;
     let tooltipPosition; 
     let hovered;
-    
 
     function getDomain(data){
         let min, max;
