@@ -66,6 +66,25 @@
             scaleLabel="% Tree Cover (2000)"
             renderTooltip = {(d) => `<h1>${d.department_name}, ${d.country}</h1><p>Tree Cover (2000): ${(d.COVER_2000 / d.TOTAL_SQUA * 100).toFixed(2)}%</p>`}
         />
+        <Raster
+            {L}
+            {map}
+            url="/raster/loss.png"
+            visible={index == 3}
+            bounds={[[17.8292499999999983, -92.25], [12.971, -83.14575]]}
+        />
+        <Choropleth 
+            visible={index == 4}
+            {L} 
+            {map} 
+            data={departments} 
+            colorScale={d3.scaleSequential(d3.interpolateReds)}
+            f={(d) => d.LOSS_10_YE / d.TOTAL_SQUA}
+            formatDomain={(d) => (100 * d).toFixed(2)}
+            scaleLabel="Forest Cover Loss (2012-2021)"
+            renderTooltip = {(d) => `<h1>${d.department_name}, ${d.country}</h1><p>Forest Cover Loss (2012-2021): ${(d.LOSS_10_YE / d.TOTAL_SQUA * 100).toFixed(2)}%</p>`}
+        />
+
     </div>
   
     <div class="foreground" slot="foreground">
@@ -78,18 +97,6 @@
     </div>
 </Scroller>
 
-
-
-<!-- <Choropleth 
-    {L} 
-    {map} 
-    data={departments} 
-    colorScale={d3.scaleSequential(d3.interpolateReds)}
-    f={(d) => d.LOSS_10_YE / d.TOTAL_SQUA}
-    formatDomain={(d) => (100 * d).toFixed(2)}
-    scaleLabel="Forest Cover Loss (2012-2021)"
-    renderTooltip = {(d) => `<h1>${d.department_name}, ${d.country}</h1><p>Forest Cover Loss (2012-2021): ${(d.LOSS_10_YE / d.TOTAL_SQUA * 100).toFixed(2)}%</p>`}
-/> -->
 
 <style>
     :global(body){

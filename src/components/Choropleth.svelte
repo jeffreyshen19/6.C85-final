@@ -103,7 +103,7 @@
     {@html renderTooltip(hovered)}
 </Tooltip>
 
-{#if domain && colorScale}
+{#if domain && colorScale && visible}
     <div class = "scale">
         <p><strong style:font-size="14px">{scaleLabel}</strong></p>
         <div 
@@ -126,6 +126,7 @@
         z-index: 1000;
         bottom: 10px;
         left: 10px;
+        transition: 1s all;
     }
 
     .scale div{
