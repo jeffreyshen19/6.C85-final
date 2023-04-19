@@ -8,6 +8,7 @@
     import Choropleth from "../components/Choropleth.svelte";
     import Basemap from "../components/Basemap.svelte";
     import Raster from "../components/Raster.svelte";
+    import BarChart from "../components/BarChart.svelte";
     import departments from "../geojson/departments.json";
     import Scroller from "@sveltejs/svelte-scroller";
     import * as d3 from "d3";
@@ -47,7 +48,10 @@
         </div>
 
 
-        <Basemap bind:L={L} bind:map={map}/>
+        <Basemap 
+            bind:L={L} bind:map={map}
+            visible={index <= 4}
+        />
         <Raster
             {L}
             {map}
@@ -84,6 +88,7 @@
             scaleLabel="Forest Cover Loss (2012-2021)"
             renderTooltip = {(d) => `<h1>${d.department_name}, ${d.country}</h1><p>Forest Cover Loss (2012-2021): ${(d.LOSS_10_YE / d.TOTAL_SQUA * 100).toFixed(2)}%</p>`}
         />
+        <BarChart />
 
     </div>
   

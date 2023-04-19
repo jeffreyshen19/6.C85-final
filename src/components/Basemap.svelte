@@ -4,6 +4,7 @@
 
     export let L;
     export let map;
+    export let visible;
 
     onMount(async () => {
 
@@ -29,11 +30,12 @@
     });
 </script>
 
-<div id = "map"></div>
+<div id = "map" style:display={visible ? "block" : "none"}></div>
 
 <style>
     #map { 
         height: 100vh;
         width: 100vw; 
     }
+    
 </style>
