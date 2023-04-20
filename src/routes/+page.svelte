@@ -10,6 +10,7 @@
     import Raster from "../components/Raster.svelte";
     import BarChart from "../components/BarChart.svelte";
     import departments from "../geojson/departments.json";
+    import fi_departments from "../geojson/food_insecurity.json";
     import Scroller from "@sveltejs/svelte-scroller";
     import * as d3 from "d3";
 
@@ -50,7 +51,7 @@
 
         <Basemap 
             bind:L={L} bind:map={map}
-            visible={index <= 4}
+            visible={index <= 5}
         />
         <Raster
             {L}
@@ -87,6 +88,17 @@
             formatDomain={(d) => (100 * d).toFixed(2)}
             scaleLabel="Forest Cover Loss (2012-2021)"
             renderTooltip = {(d) => `<h1>${d.department_name}, ${d.country}</h1><p>Forest Cover Loss (2012-2021): ${(d.LOSS_10_YE / d.TOTAL_SQUA * 100).toFixed(2)}%</p>`}
+        />
+        <Choropleth 
+            visible={index == 5}
+            {L} 
+            {map} 
+            data={fi_departments} 
+            colorScale={d3.scaleSequential(d3.interpolateYlOrRd)}
+            f={(d) => d.FOOD_INSECURITY_COUNT/ d.SURVEYED_SIZE}
+            formatDomain={(d) => (100 * d).toFixed(2)}
+            scaleLabel="Food insecurity (%)"
+            renderTooltip = {(d) => `<h1>${d.department_name}, ${d.country}</h1><p>% of population facing food insecurity: ${(d.FOOD_INSECURITY_COUNT/ d.SURVEYED_SIZE * 100).toFixed(2)}%</p>`}
         />
         <BarChart />
 

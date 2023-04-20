@@ -23,13 +23,15 @@
         let min, max;
         data.forEach((d) => {
             let t = f(d.properties);
+            if(isNaN(t)) return;
+            
             if(isNaN(min)) min = t;
             else min = Math.min(min, t);
 
             if(isNaN(max)) max = t;
             else max = Math.max(max, t);
         });
-
+        console.log([min, max]);
         return [min, max];
     }
 
@@ -107,7 +109,7 @@
     <div class = "scale">
         <p><strong style:font-size="14px">{scaleLabel}</strong></p>
         <div 
-            style:background-image="linear-gradient(to right, {colorScale(domain[0])}, {colorScale((domain[1] - domain[0]) * 0.25)}, {colorScale((domain[1] - domain[0]) * 0.5)}, {colorScale((domain[1] - domain[0]) * 0.75)},{colorScale(domain[1])})"
+            style:background-image="linear-gradient(to right, {colorScale(domain[0])}, {colorScale((domain[1] - domain[0]) * 0.25)}, {colorScale((domain[1] - domain[0]) * 0.5)}, {colorScale((domain[1] - domain[0]) * 0.75)}, {colorScale(domain[1])})"
         ></div>
         <p style:font-size="10px">
             <span style:float="left">{formatDomain(domain[0])}%</span>
