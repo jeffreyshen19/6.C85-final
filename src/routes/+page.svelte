@@ -125,13 +125,13 @@
     </div>
   
     <div class="foreground" slot="foreground">
-        <section>This is the first section.</section>
-        <section>This is the second section.</section>
-        <section>This is the third section.</section>
-        <section>This is the fourth section.</section>
-        <section>This is the fifth section.</section>
-        <section>This is the sixth section.</section>
-        <section>This is the seventh section.</section>
+        <section><div class = "text">This is the first section.</div></section>
+        <section><div class = "text">This is the second section.</div></section>
+        <section><div class = "text">This is the third section.</div></section>
+        <section><div class = "text">This is the fourth section.</div></section>
+        <section><div class = "text">This is the fifth section.</div></section>
+        <section><div class = "text">This is the sixth section.</div></section>
+        <section><div class = "text">This is the seventh section.</div></section>
     </div>
 </Scroller>
 
@@ -157,11 +157,9 @@
     }
   
     .foreground {
-      width: 50%;
-      /* margin: 0 auto; */
       height: auto;
       position: relative;
-      outline: red solid 3px;
+      float: right;
     }
   
     .progress-bars {
@@ -173,13 +171,23 @@
   
     section {
       height: 80vh;
-      background-color: rgba(0, 0, 0, 0.2); /* 20% opaque */
-      /* color: white; */
-      outline: magenta solid 3px;
-      text-align: center;
-      max-width: 750px; /* adjust at will */
-      color: black;
-      padding: 1em;
-      margin: 0 0 2em 0;
+      position: relative;
+      width: 300px;
+      margin-right: 50px;
+    }
+
+    .text{
+        color: #4d4d4d;
+        font-family: Helvetica, Arial;
+		font-weight: 200;
+        padding: 1em;
+        box-sizing: border-box;
+        width: 100%;
+        background: white;
+        box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
+        border-radius: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        position: absolute;
     }
 </style>
