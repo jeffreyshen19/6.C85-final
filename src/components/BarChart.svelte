@@ -1,26 +1,16 @@
 <script>
     import * as d3 from "d3";
 
-    export let title = "External migration due to the direct impact of a natural hazard, by department";
-	export const data = [
-        ["Alta Verapaz, GT", 0.05660377358490566],
-        ["Yoro, HND", 0.03015075376884422],
-        ["Cortes, HND", 0.01694915254237288],
-        ["San Marcos, GT", 0.008771929824561403],
-        ["Ahuachapan, SLV", 0.0],
-        ["Cabañas, SLV", 0.0],
-        ["San Salvador, SLV", 0.0],
-        ["Usulutan, SLV", 0.0],
-        ["Choluteca, HND", 0.0],
-        ["Francisco Morazan, HND", 0.0],
-        ["Huehuetenango, GT", 0.0],
-        ["Chiquimula, GT", 0.0],
-    ];
-    export let highlighted = new Set([0, 1]);
+    export let title;
+	export let data;
+    export let highlighted = [];
+    $: highlightedIndexes = new Set(highlighted);
 
-	// const xTicks = [1990, 1995, 2000, 2005, 2010, 2015];
-	const yTicks = [0, 0.02, 0.04, 0.06, 0.08, 0.1];
-	const padding = { top: 20, right: 15, bottom: 175, left: 40 };
+    export let yAxisLabel = "";
+    export let yTicks;
+    export let formatYTick = (d) => d;
+
+	const padding = { top: 20, right: 15, bottom: 175, left: 25 };
 
 	let width = 500;
 	let height = 350;
@@ -44,17 +34,20 @@
             <!-- y axis -->
             <g class="axis y-axis">
                 {#each yTicks as tick}
-                    <g class="tick tick-{tick}" transform="translate(0, {yScale(tick)})">
+                    <g class="tick tick-{tick}" transform="translate({padding.left}, {yScale(tick)})">
                         <line x2="100%"></line>
-                        <text y="-4">{tick * 100}% {tick == 0.06 ? " of respondents in that department" : ""}</text>
+                        <text y="-4">{formatYTick(tick)}</text>
                     </g>
                 {/each}
+
+                <g class = "y-axis-label" transform="translate(10, {height / 2}) rotate(-90)">
+                    <text x="{(height - padding.bottom - padding.top)/2}" style:text-anchor="middle">{yAxisLabel}</text>
+                </g>
             </g>
-    
             <!-- x axis -->
             <g class="axis x-axis">
                 {#each data as point, i}
-                    <g class="tick" transform="translate({xScale(i) + barWidth / 2},{height - padding.bottom + 12})">
+                    <g class="tick" transform="translate({padding.left + xScale(i) + barWidth / 2},{height - padding.bottom + 12})">
                         <text transform="rotate(-50)" dx=".4em" dy="0.3em"  style:text-anchor="end">{point[0]}</text>
                     </g>
                 {/each}
@@ -63,11 +56,11 @@
             <g class='bars'>
                 {#each data as point, i}
                     <rect
-                        x="{xScale(i) + 2}"
+                        x="{xScale(i) + 2 + padding.left}"
                         y="{yScale(point[1])}"
                         width="{barWidth - 4}"
                         height="{yScale(0) - yScale(point[1])}"
-                        stroke={highlighted.has(i) ? "#ede99d" : "none"} 
+                        stroke={highlightedIndexes.has(i) ? "#ede99d" : "none"} 
                     ></rect>
                 {/each}
             </g>
@@ -95,7 +88,7 @@
 		height: 350px;
 	}
 
-	.tick {
+	.tick, .y-axis-label     {
 		font-family: Helvetica, Arial;
 		font-size: .725em;
 		font-weight: 200;

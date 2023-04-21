@@ -89,7 +89,7 @@
             scaleLabel="Forest Cover Loss (2012-2021)"
             renderTooltip = {(d) => `<h1>${d.department_name}, ${d.country}</h1><p>Forest Cover Loss (2012-2021): ${(d.LOSS_10_YE / d.TOTAL_SQUA * 100).toFixed(2)}%</p>`}
         />
-        <Choropleth 
+        <!-- <Choropleth 
             visible={index == 5}
             {L} 
             {map} 
@@ -99,8 +99,28 @@
             formatDomain={(d) => (100 * d).toFixed(2)}
             scaleLabel="Food insecurity (%)"
             renderTooltip = {(d) => `<h1>${d.department_name}, ${d.country}</h1><p>% of population facing food insecurity: ${(d.FOOD_INSECURITY_COUNT/ d.SURVEYED_SIZE * 100).toFixed(2)}%</p>`}
+        /> -->
+        <BarChart 
+            data={[
+                ["Alta Verapaz, GT", 0.05660377358490566],
+                ["Yoro, HND", 0.03015075376884422],
+                ["Cortes, HND", 0.01694915254237288],
+                ["San Marcos, GT", 0.008771929824561403],
+                ["Ahuachapan, SLV", 0.0],
+                ["Cabañas, SLV", 0.0],
+                ["San Salvador, SLV", 0.0],
+                ["Usulutan, SLV", 0.0],
+                ["Choluteca, HND", 0.0],
+                ["Francisco Morazan, HND", 0.0],
+                ["Huehuetenango, GT", 0.0],
+                ["Chiquimula, GT", 0.0],
+            ]}
+            highlighted = {[0, 1]}
+            yAxisLabel="Percent of Respondents"
+            yTicks={[0, 0.02, 0.04, 0.06, 0.08, 0.1]}
+            formatYTick={(d) => (d * 100) + "%"}
+            title="External migration due to the direct impact of a natural hazard, by department"
         />
-        <BarChart />
 
     </div>
   
@@ -111,6 +131,7 @@
         <section>This is the fourth section.</section>
         <section>This is the fifth section.</section>
         <section>This is the sixth section.</section>
+        <section>This is the seventh section.</section>
     </div>
 </Scroller>
 
