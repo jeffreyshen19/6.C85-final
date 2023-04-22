@@ -19,6 +19,8 @@
 
     let count, index, offset, progress;
     let width, height;
+
+    const wfpDepartments = new Set(['1184', '901730', 'GT20', '1193', 'GT12', '901742', 'GT13', '901726', 'GT16', '1197', '1185', '901732']);
 </script>
 
 
@@ -51,7 +53,7 @@
 
         <Basemap 
             bind:L={L} bind:map={map}
-            visible={index <= 5}
+            visible={index <= 6}
         />
         <Raster
             {L}
@@ -71,36 +73,32 @@
             scaleLabel="% Tree Cover (2000)"
             renderTooltip = {(d) => `<h1>${d.department_name}, ${d.country}</h1><p>Tree Cover (2000): ${(d.COVER_2000 / d.TOTAL_SQUA * 100).toFixed(2)}%</p>`}
         />
-        <Raster
-            {L}
-            {map}
-            url="/raster/loss.png"
-            visible={index == 3}
-            bounds={[[17.8292499999999983, -92.25], [12.971, -83.14575]]}
-        />
         <Choropleth 
-            visible={index == 4}
+            visible={index >= 3 && index < 6}
             {L} 
             {map} 
             data={departments} 
             colorScale={d3.scaleSequential(d3.interpolateReds)}
-            f={(d) => d.LOSS_10_YE / d.TOTAL_SQUA}
+            f={(d) => d.LOSS_10_YE / d.COVER_2000}
             formatDomain={(d) => (100 * d).toFixed(2)}
             scaleLabel="Forest Cover Loss (2012-2021)"
+            highlight={(d) => index < 5 || wfpDepartments.has(d.department_id)}
             renderTooltip = {(d) => `<h1>${d.department_name}, ${d.country}</h1><p>Forest Cover Loss (2012-2021): ${(d.LOSS_10_YE / d.TOTAL_SQUA * 100).toFixed(2)}%</p>`}
         />
-        <!-- <Choropleth 
-            visible={index == 5}
+        <Choropleth 
+            visible={index == 6}
             {L} 
             {map} 
             data={fi_departments} 
-            colorScale={d3.scaleSequential(d3.interpolateYlOrRd)}
+            colorScale={d3.scaleSequential(d3.interpolateReds)}
             f={(d) => d.FOOD_INSECURITY_COUNT/ d.SURVEYED_SIZE}
             formatDomain={(d) => (100 * d).toFixed(2)}
             scaleLabel="Food insecurity (%)"
+            highlight={(d) => wfpDepartments.has(d.department_id)}
             renderTooltip = {(d) => `<h1>${d.department_name}, ${d.country}</h1><p>% of population facing food insecurity: ${(d.FOOD_INSECURITY_COUNT/ d.SURVEYED_SIZE * 100).toFixed(2)}%</p>`}
-        /> -->
+        />
         <BarChart 
+            visible={index > 6}
             data={[
                 ["Alta Verapaz, GT", 0.05660377358490566],
                 ["Yoro, HND", 0.03015075376884422],
@@ -126,10 +124,44 @@
   
     <div class="foreground" slot="foreground">
         <section><div class = "text">This is the first section.</div></section>
-        <section><div class = "text">This is the second section.</div></section>
-        <section><div class = "text">This is the third section.</div></section>
-        <section><div class = "text">This is the fourth section.</div></section>
-        <section><div class = "text">This is the fifth section.</div></section>
+        <section>
+            <div class = "text">
+                This map shows tree cover in the Northern Triangle in 2000. As can be seen, the region is <i>heavily</i> forested.
+            </div>
+        </section>
+        <section>
+            <div class = "text">
+                Here's the same map, visualized on the department level as the percent of overall area covered by trees. Feel free to hover over the map to see more information.
+            </div>
+        </section>
+        <section>
+            <div class = "text">
+                When looking at deforestation rates (forest loss as a percent of original forest cover), it is clear that deforestation is a major issue impacting the region.
+            </div>
+        </section>
+
+        <!-- The maps below show the forest coverage and degree
+                of deforestation by region in Central America over time.
+                Alta Verapaz, Guatemala, Yoro, Honduras, and Usulutan, 
+                El Salvador are among the regions that experienced the
+                 most severe deforestation. -->
+        <section>
+            <div class = "text">
+                <h3>Deforestation & Food Security </h3>
+                Deforestation reduces the supply of clean drinking water and food for surrounding communities, which leads to food insecurity. According to studies, the highest concentrations of food insecure populations live in regions with tropical forests. Deforestation also destroys the biodiversity and fertility of the land, making it unsustainable to be a reliable food source for people nearby.
+            </div>
+        </section>
+        <section>
+            <div class = "text">
+                To better understand the relationship between deforestation and food security, we reference survey data from the World Food Program. The survey was only conducted in a few departments in each country, highlighted here. 
+            </div>
+        </section>
+        <section>
+            <div class = "text">
+                When comparing the deforestation rates to food insecurity, it's clear that heavily deforested areas also have high levels of food insecurity, with the exception of departments in El Salvador.
+            </div>
+        </section>
+
         <section><div class = "text">This is the sixth section.</div></section>
         <section><div class = "text">This is the seventh section.</div></section>
     </div>
@@ -189,5 +221,10 @@
         top: 50%;
         transform: translateY(-50%);
         position: absolute;
+    }
+    
+    .text h3{
+        margin: 0;
+        margin-bottom: 5px;
     }
 </style>

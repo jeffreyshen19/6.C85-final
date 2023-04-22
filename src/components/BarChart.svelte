@@ -9,6 +9,7 @@
     export let yAxisLabel = "";
     export let yTicks;
     export let formatYTick = (d) => d;
+    export let visible;
 
 	const padding = { top: 20, right: 15, bottom: 175, left: 25 };
 
@@ -27,7 +28,7 @@
 	$: barWidth = innerWidth / data.length;
 </script>
 
-<div class = "wrapper">
+<div class = "wrapper" style:opacity={visible ? 1 : 0}>
     <h2>{title}</h2>
     <div class="chart" bind:clientWidth={width} bind:clientHeight={height}>
         <svg>
@@ -80,6 +81,7 @@
         transform: translate(-50%, -50%);
         width: 100%;
 		max-width: 500px;
+        transition: opacity 0.4s;
     }
 
 	svg {

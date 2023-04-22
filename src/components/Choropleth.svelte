@@ -14,6 +14,7 @@
     export let f; // a method returning the attribute to visualize on the choropleth
     export let renderTooltip; // a method returning the html of the tooltip 
     export let visible;
+    export let highlight = (d) => true; // a method returning true if an element d should be highlighted.
 
     let choroplethLayer;
     let tooltipPosition; 
@@ -41,9 +42,9 @@
             style: function style(feature) {
                 return {
                     fillColor: colorScale(f(feature.properties)),
-                    weight: 1,
+                    weight: 1.5,
                     opacity: 0,
-                    color: 'white',
+                    color: '#fff',
                     fillOpacity: 0
                 };
             },
@@ -53,19 +54,13 @@
         // map.fitBounds(choroplethLayer.getBounds());
     }
 
-    $: if(choroplethLayer) {
-        if(visible){
-            choroplethLayer.setStyle({
-                opacity: 1,
-                fillOpacity: 0.9
-            })
-        } 
-        else {
-            choroplethLayer.setStyle({
-                opacity: 0,
-                fillOpacity: 0
-            })
-        }
+    $: {
+        if(choroplethLayer) choroplethLayer.setStyle((feature) => {
+            return {
+                opacity: visible && highlight(feature.properties) ? 1 : 0,
+                fillOpacity: visible ? (highlight(feature.properties) ? 0.9 : 0.02) : 0,
+            }
+        })
     }
 
     function highlightFeature(e) {

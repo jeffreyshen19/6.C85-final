@@ -5,6 +5,8 @@
     export let L;
     export let map;
     export let visible;
+    
+    let osm;
 
     onMount(async () => {
 
@@ -22,7 +24,7 @@
             touchZoom: false
         }).setView([15, -89], 6);
 
-        var osm = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        osm = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
             subdomains: 'abcd',
             maxZoom: 20
@@ -30,12 +32,13 @@
     });
 </script>
 
-<div id = "map" style:display={visible ? "block" : "none"}></div>
+<div id = "map" style:opacity={visible ? 1 : 0}></div>
 
 <style>
     #map { 
         height: 100vh;
         width: 100vw; 
+        transition: opacity 0.4s;
     }
     
 </style>
