@@ -9,6 +9,7 @@
     import Basemap from "../components/Basemap.svelte";
     import Raster from "../components/Raster.svelte";
     import BarChart from "../components/BarChart.svelte";
+    import Table from "../components/Table.svelte";
     import departments from "../geojson/departments.json";
     import fi_departments from "../geojson/food_insecurity.json";
     import Scroller from "@sveltejs/svelte-scroller";
@@ -19,6 +20,23 @@
 
     let count, index, offset, progress;
     let width, height;
+
+    // let forest_loss = {};
+
+    // departments.features.forEach((d) => {
+    //     forest_loss[d.properties.department_id] = d.properties.LOSS_10_YE / d.properties.COVER_2000
+    // });
+    // console.log(forest_loss);
+    // let countries = [];
+    // console.log(fi_departments.features.map((d) => {
+    //     return {
+    //         "department_id": d.properties.department_id,
+    //         "country": d.properties.country,
+    //         "department_name": d.properties.department_name,
+    //         "food_insecurity": d.properties.FOOD_INSECURITY_COUNT/ d.properties.SURVEYED_SIZE,
+    //         "forest_loss": forest_loss[d.properties.department_id]
+    //     }
+    // }).filter((d) => !isNaN(d.food_insecurity)));
 
     const wfpDepartments = new Set(['1184', '901730', 'GT20', '1193', 'GT12', '901742', 'GT13', '901726', 'GT16', '1197', '1185', '901732']);
 </script>
@@ -64,6 +82,7 @@
         />
         <Choropleth 
             visible={index == 2}
+            domain={[0, 1]}
             {L} 
             {map} 
             data={departments} 
@@ -78,26 +97,36 @@
             {L} 
             {map} 
             data={departments} 
+            domain={[0, 0.25]}
             colorScale={d3.scaleSequential(d3.interpolateReds)}
             f={(d) => d.LOSS_10_YE / d.COVER_2000}
             formatDomain={(d) => (100 * d).toFixed(2)}
             scaleLabel="Forest Cover Loss (2012-2021)"
             highlight={(d) => index < 5 || wfpDepartments.has(d.department_id)}
-            renderTooltip = {(d) => `<h1>${d.department_name}, ${d.country}</h1><p>Forest Cover Loss (2012-2021): ${(d.LOSS_10_YE / d.TOTAL_SQUA * 100).toFixed(2)}%</p>`}
+            renderTooltip = {(d) => `<h1>${d.department_name}, ${d.country}</h1><p>Forest Cover Loss (2012-2021): ${(d.LOSS_10_YE / d.COVER_2000 * 100).toFixed(2)}%</p>`}
         />
         <Choropleth 
             visible={index == 6}
             {L} 
             {map} 
             data={fi_departments} 
-            colorScale={d3.scaleSequential(d3.interpolateReds)}
+            domain={[0, 0.75]}
+            colorScale={d3.scaleSequential(d3.interpolateRgb("#fff", "#d33800"))}
             f={(d) => d.FOOD_INSECURITY_COUNT/ d.SURVEYED_SIZE}
             formatDomain={(d) => (100 * d).toFixed(2)}
             scaleLabel="Food insecurity (%)"
             highlight={(d) => wfpDepartments.has(d.department_id)}
             renderTooltip = {(d) => `<h1>${d.department_name}, ${d.country}</h1><p>% of population facing food insecurity: ${(d.FOOD_INSECURITY_COUNT/ d.SURVEYED_SIZE * 100).toFixed(2)}%</p>`}
         />
-        <BarChart 
+        <Table 
+            visible={index > 6}
+            highlighted = {
+                index == 7 || index == 11 ? [0, 1, 2] : 
+                    index == 8 ? [0] : 
+                        index == 9 ? [1] : [2]
+            }
+        />
+        <!-- <BarChart 
             visible={index > 6}
             data={[
                 ["Alta Verapaz, GT", 0.05660377358490566],
@@ -118,7 +147,7 @@
             yTicks={[0, 0.02, 0.04, 0.06, 0.08, 0.1]}
             formatYTick={(d) => (d * 100) + "%"}
             title="External migration due to the direct impact of a natural hazard, by department"
-        />
+        /> -->
 
     </div>
   
@@ -136,7 +165,7 @@
         </section>
         <section>
             <div class = "text">
-                When looking at deforestation rates (forest loss as a percent of original forest cover), it is clear that deforestation is a major issue impacting the region.
+                When looking at deforestation rates (forest loss as a percent of original forest cover), it is clear that deforestation is a major issue impacting the region. Alta Verapaz in Guatemala has lost nearly a quarter of its orgiinal forest cover in the past 10 years!
             </div>
         </section>
 
@@ -158,12 +187,33 @@
         </section>
         <section>
             <div class = "text">
-                When comparing the deforestation rates to food insecurity, it's clear that heavily deforested areas also have high levels of food insecurity, with the exception of departments in El Salvador.
+                When comparing the deforestation rates to food insecurity, it's clear that heavily deforested areas also have high levels of food insecurity, though food insecurity is an issue across the whole region. 
             </div>
         </section>
-
-        <section><div class = "text">This is the sixth section.</div></section>
-        <section><div class = "text">This is the seventh section.</div></section>
+        <section>
+            <div class = "text">
+                Here's a table showing the relationship between deforestation and food insecurity. 
+            </div>
+        </section>
+        <section>
+            <div class = "text">
+                In Guatemala, Alta Verapaz has both the highest deforestation rates and the highest food insecurity, by a significant degree.
+            </div>
+        </section>
+        <section>
+            <div class = "text">
+                In Honduras, the most heavily deforested department, Cortés, also has the highest food insecurity rate, though the correlation is less clear in Honduras, as all departments have comparable food insecurity.
+            </div>
+        </section>
+        <section>
+            <div class = "text">
+                Lastly, in El Salvador, food insecurity is a much more serious issue, though the deforestation rate is low across all departments. 
+            </div>
+        </section>
+        <section>
+            <div class = "text">
+                In summary, there is some correlation between food insecurity and deforestation, especially in Guatemala, though food insecurity is a major issue across the region, and in areas with low deforestation.
+        </section>
     </div>
 </Scroller>
 

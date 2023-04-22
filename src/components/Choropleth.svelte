@@ -7,8 +7,8 @@
     export let formatDomain;
     export let scaleLabel;
     export let colorScale;
-    let domain; 
-    $: if(data) domain = getDomain(data.features);
+    export let domain;
+    // $: if(data) domain = getDomain(data.features);
     $: if(colorScale && data) colorScale = colorScale.domain(domain);
 
     export let f; // a method returning the attribute to visualize on the choropleth
@@ -32,7 +32,6 @@
             if(isNaN(max)) max = t;
             else max = Math.max(max, t);
         });
-        console.log([min, max]);
         return [min, max];
     }
 
