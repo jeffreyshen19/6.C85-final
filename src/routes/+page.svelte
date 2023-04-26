@@ -84,7 +84,7 @@
 
         <div class="chartBackground" style:opacity={index == 0 ? 1 : 0}>
             <div style = "display: grid; grid-gap: 2px; grid-template-columns:auto auto auto auto auto auto auto auto auto auto;">
-                {#each GTlist as item(item.i)}
+                {#each GTlist as item}
                     <GridItem {item}/>
                 {/each}
                 <div style = "text">
@@ -92,12 +92,12 @@
                 </div>
             </div>
             <div style = "display: grid; grid-gap: 2px; grid-template-columns:auto auto auto auto auto auto auto auto auto auto;">
-                {#each ESlist as item(item.i)}
+                {#each ESlist as item}
                     <GridItem {item}/>
                 {/each}
             </div>
             <div style = "display: grid; grid-gap: 2px; grid-template-columns:auto auto auto auto auto auto auto auto auto auto;">
-                {#each HDlist as item(item.i)}
+                {#each HDlist as item}
                     <GridItem {item}/>
                 {/each}
             </div>
