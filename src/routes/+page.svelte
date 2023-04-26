@@ -53,6 +53,13 @@
         return { index: i , country: "Honduras" }
     })
 
+    // update indices for scrolling here 
+    const index_intro = 0;
+    const index_deforestation_grid = index_intro + 1; // this is the starting index 
+    const index_forest_cover = index_deforestation_grid + 2; // meaning index_deforestation_grid part has two slides 
+    const index_food_security = index_forest_cover + 3; 
+    const index_table = index_food_security + 3;
+
 </script>
 
 
@@ -82,7 +89,31 @@
             <progress value={progress || 0} />
         </div>
 
-        <div class="chartBackground" style:opacity={index == 0 ? 1 : 0}>
+        <div class="chartBackground" style:opacity={index == index_intro ? 1 : 0}>
+        </div>
+
+        <div class="chartBackground" style:opacity={index >= index_deforestation_grid && index < index_forest_cover ? 1 : 0}>
+            <div style = "display: grid; grid-gap: 2px; grid-template-columns:auto auto auto auto auto auto auto auto auto auto;">
+                {#each GTlist as item}
+                    <GridItem {item}/>
+                {/each}
+                <div style = "text">
+                    Hi
+                </div>
+            </div>
+            <div style = "display: grid; grid-gap: 2px; grid-template-columns:auto auto auto auto auto auto auto auto auto auto;">
+                {#each ESlist as item}
+                    <GridItem {item}/>
+                {/each}
+            </div>
+            <div style = "display: grid; grid-gap: 2px; grid-template-columns:auto auto auto auto auto auto auto auto auto auto;">
+                {#each HDlist as item}
+                    <GridItem {item}/>
+                {/each}
+            </div>
+        </div>
+
+        <div class="chartBackground" style:opacity={index >= index_deforestation_grid && index < index_forest_cover ? 1 : 0}>
             <div style = "display: grid; grid-gap: 2px; grid-template-columns:auto auto auto auto auto auto auto auto auto auto;">
                 {#each GTlist as item}
                     <GridItem {item}/>
@@ -105,17 +136,17 @@
 
         <Basemap 
             bind:L={L} bind:map={map}
-            visible={index <= 6 && index > 0}
+            visible={index < index_table && index >= index_forest_cover}
         />
         <Raster
             {L}
             {map}
             url="/raster/treecover2000.png"
-            visible={index == 1}
+            visible={index == index_forest_cover}
             bounds={[[17.8292499999999983, -92.25], [12.971, -83.14575]]}
         />
         <Choropleth 
-            visible={index == 2}
+            visible={index == index_forest_cover + 1}
             domain={[0, 1]}
             {L} 
             {map} 
@@ -127,7 +158,7 @@
             renderTooltip = {(d) => `<h1>${d.department_name}, ${d.country}</h1><p>Tree Cover (2000): ${(d.COVER_2000 / d.TOTAL_SQUA * 100).toFixed(2)}%</p>`}
         />
         <Choropleth 
-            visible={index >= 3 && index < 6}
+            visible={index >= index_forest_cover + 2 && index <= index_food_security + 1}
             {L} 
             {map} 
             data={departments} 
@@ -136,11 +167,11 @@
             f={(d) => d.LOSS_10_YE / d.COVER_2000}
             formatDomain={(d) => (100 * d).toFixed(2)}
             scaleLabel="Forest Cover Loss (2012-2021)"
-            highlight={(d) => index < 5 || wfpDepartments.has(d.department_id)}
+            highlight={(d) => index <= index_food_security || wfpDepartments.has(d.department_id)}
             renderTooltip = {(d) => `<h1>${d.department_name}, ${d.country}</h1><p>Forest Cover Loss (2012-2021): ${(d.LOSS_10_YE / d.COVER_2000 * 100).toFixed(2)}%</p>`}
         />
         <Choropleth 
-            visible={index == 6}
+            visible={index == index_food_security + 2}
             {L} 
             {map} 
             data={fi_departments} 
@@ -154,11 +185,11 @@
         />
 
         <Table 
-            visible={index > 6}
+            visible={index >= index_table}
             highlighted = {
-                index == 7 || index == 11 ? [0, 1, 2] : 
-                    index == 8 ? [0] : 
-                        index == 9 ? [1] : [2]
+                index == index_table || index == index_table + 4 ? [0, 1, 2] : 
+                    index == index_table + 1 ? [0] : 
+                        index == index_table + 2 ? [1] : [2]
             }
         />
 
@@ -190,7 +221,17 @@
     <div class="foreground" slot="foreground">
         <section> 
             <div class = "text">
-                First section
+                Intro slide
+            </div>
+        </section>
+        <section> 
+            <div class = "text">
+                First grid
+            </div>
+        </section>
+        <section> 
+            <div class = "text">
+                Second grid
             </div>
         </section>
         <section>
