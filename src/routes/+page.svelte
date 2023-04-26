@@ -10,6 +10,7 @@
     import Raster from "../components/Raster.svelte";
     import BarChart from "../components/BarChart.svelte";
     import Table from "../components/Table.svelte";
+    import GridItem from "../components/GridItem.svelte";
     import departments from "../geojson/departments.json";
     import fi_departments from "../geojson/food_insecurity.json";
     import Scroller from "@sveltejs/svelte-scroller";
@@ -39,6 +40,19 @@
     // }).filter((d) => !isNaN(d.food_insecurity)));
 
     const wfpDepartments = new Set(['1184', '901730', 'GT20', '1193', 'GT12', '901742', 'GT13', '901726', 'GT16', '1197', '1185', '901732']);
+
+    const GTlist=Array(100).fill().map((_,i)=>{
+        return { index: i , country: "Guatemala" }
+    })
+
+    const ESlist=Array(100).fill().map((_,i)=>{
+        return { index: i , country: "El Salvador" }
+    })
+
+    const HDlist=Array(100).fill().map((_,i)=>{
+        return { index: i , country: "Honduras" }
+    })
+
 </script>
 
 
@@ -68,10 +82,30 @@
             <progress value={progress || 0} />
         </div>
 
+        <div class="chartBackground" style:opacity={index == 0 ? 1 : 0}>
+            <div style = "display: grid; grid-gap: 2px; grid-template-columns:auto auto auto auto auto auto auto auto auto auto;">
+                {#each GTlist as item(item.i)}
+                    <GridItem {item}/>
+                {/each}
+                <div style = "text">
+                    Hi
+                </div>
+            </div>
+            <div style = "display: grid; grid-gap: 2px; grid-template-columns:auto auto auto auto auto auto auto auto auto auto;">
+                {#each ESlist as item(item.i)}
+                    <GridItem {item}/>
+                {/each}
+            </div>
+            <div style = "display: grid; grid-gap: 2px; grid-template-columns:auto auto auto auto auto auto auto auto auto auto;">
+                {#each HDlist as item(item.i)}
+                    <GridItem {item}/>
+                {/each}
+            </div>
+        </div>
 
         <Basemap 
             bind:L={L} bind:map={map}
-            visible={index <= 6}
+            visible={index <= 6 && index > 0}
         />
         <Raster
             {L}
@@ -118,6 +152,7 @@
             highlight={(d) => wfpDepartments.has(d.department_id)}
             renderTooltip = {(d) => `<h1>${d.department_name}, ${d.country}</h1><p>% of population facing food insecurity: ${(d.FOOD_INSECURITY_COUNT/ d.SURVEYED_SIZE * 100).toFixed(2)}%</p>`}
         />
+
         <Table 
             visible={index > 6}
             highlighted = {
@@ -126,6 +161,7 @@
                         index == 9 ? [1] : [2]
             }
         />
+
         <!-- <BarChart 
             visible={index > 6}
             data={[
@@ -152,7 +188,11 @@
     </div>
   
     <div class="foreground" slot="foreground">
-        <section><div class = "text">This is the first section.</div></section>
+        <section> 
+            <div class = "text">
+                First section
+            </div>
+        </section>
         <section>
             <div class = "text">
                 This map shows tree cover in the Northern Triangle in 2000. As can be seen, the region is <i>heavily</i> forested.
@@ -237,6 +277,20 @@
         height: 100vh;
         position: relative;
     }
+
+    .chartBackground{
+		background:white;
+		display:flex;
+        flex-wrap:wrap;	
+		flex-direction:column;
+		height:100vh;
+        width:100vw;
+		justify-content:center;
+		align-items:center;
+		position:absolute;
+	}
+
+    
   
     .foreground {
       height: auto;
