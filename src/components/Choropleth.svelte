@@ -7,6 +7,7 @@
     export let formatDomain;
     export let scaleLabel;
     export let colorScale;
+    export let showScale = true;
     export let domain;
     // $: if(data) domain = getDomain(data.features);
     $: if(colorScale && data) colorScale = colorScale.domain(domain);
@@ -40,11 +41,10 @@
         choroplethLayer = L.geoJson(data, {
             style: function style(feature) {
                 return {
-                    fillColor: colorScale(f(feature.properties)),
                     weight: 1.5,
+                    color: '#eee',
                     opacity: 0,
-                    color: '#fff',
-                    fillOpacity: 0
+                    fillOpacity: 0,
                 };
             },
             onEachFeature: onEachFeature
@@ -53,9 +53,18 @@
         map.fitBounds(choroplethLayer.getBounds());
     }
 
+    function resetChoroplethStyles(){
+        choroplethLayer.setStyle((feature) => {
+            return {
+                weight: 1.5
+            }
+        })
+    }
+
     $: {
         if(choroplethLayer) choroplethLayer.setStyle((feature) => {
             return {
+                fillColor: colorScale(f(feature.properties)),
                 opacity: visible && highlight(feature.properties) ? 1 : 0,
                 fillOpacity: visible ? (highlight(feature.properties) ? 0.9 : 0.02) : 0,
             }
@@ -69,7 +78,7 @@
         moveTooltip(e);
 
         layer.setStyle({
-            weight: 5,
+            weight: 3,
         });
 
         layer.bringToFront();
@@ -80,7 +89,7 @@
     }
 
     function resetHighlight(e) {
-        choroplethLayer.resetStyle(e.target);
+        resetChoroplethStyles();
         tooltipPosition = null;
         hovered = null;
     }
@@ -99,15 +108,15 @@
     {@html renderTooltip(hovered)}
 </Tooltip>
 
-{#if domain && colorScale && visible}
+{#if domain && colorScale && visible && showScale}
     <div class = "scale">
         <p><strong style:font-size="14px">{scaleLabel}</strong></p>
         <div 
             style:background-image="linear-gradient(to right, {colorScale(domain[0])}, {colorScale((domain[1] - domain[0]) * 0.25)}, {colorScale((domain[1] - domain[0]) * 0.5)}, {colorScale((domain[1] - domain[0]) * 0.75)}, {colorScale(domain[1])})"
         ></div>
         <p style:font-size="10px">
-            <span style:float="left">{formatDomain(domain[0])}%</span>
-            <span style:float="right">{formatDomain(domain[1])}%</span>
+            <span style:float="left">{formatDomain(domain[0])}</span>
+            <span style:float="right">{formatDomain(domain[1])}</span>
         </p>
     </div>
 {/if}

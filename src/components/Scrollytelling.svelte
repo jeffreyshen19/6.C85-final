@@ -149,7 +149,7 @@
             data={departments} 
             colorScale={d3.scaleSequential(d3.interpolateGreens)}
             f={(d) => d.COVER_2000 / d.TOTAL_SQUA}
-            formatDomain={(d) => (100 * d).toFixed(2)}
+            formatDomain={(d) => (100 * d).toFixed(2) + "%"}
             scaleLabel="% Tree Cover (2000)"
             renderTooltip = {(d) => `<h1>${d.department_name}, ${d.country}</h1><p>Tree Cover (2000): ${(d.COVER_2000 / d.TOTAL_SQUA * 100).toFixed(2)}%</p>`}
         />
@@ -161,7 +161,7 @@
             domain={[0, 0.25]}
             colorScale={d3.scaleSequential(d3.interpolateReds)}
             f={(d) => d.LOSS_10_YE / d.COVER_2000}
-            formatDomain={(d) => (100 * d).toFixed(2)}
+            formatDomain={(d) => (100 * d).toFixed(2) + "%"}
             scaleLabel="Forest Cover Loss (2012-2021)"
             highlight={(d) => index <= index_food_security || wfpDepartments.has(d.department_id)}
             renderTooltip = {(d) => `<h1>${d.department_name}, ${d.country}</h1><p>Forest Cover Loss (2012-2021): ${(d.LOSS_10_YE / d.COVER_2000 * 100).toFixed(2)}%</p>`}
@@ -174,7 +174,7 @@
             domain={[0, 0.75]}
             colorScale={d3.scaleSequential(d3.interpolateRgb("#fff", "#d33800"))}
             f={(d) => d.FOOD_INSECURITY_COUNT/ d.SURVEYED_SIZE}
-            formatDomain={(d) => (100 * d).toFixed(2)}
+            formatDomain={(d) => (100 * d).toFixed(2) + "%"}
             scaleLabel="Food insecurity (%)"
             highlight={(d) => wfpDepartments.has(d.department_id)}
             renderTooltip = {(d) => `<h1>${d.department_name}, ${d.country}</h1><p>% of population facing food insecurity: ${(d.FOOD_INSECURITY_COUNT/ d.SURVEYED_SIZE * 100).toFixed(2)}%</p>`}
