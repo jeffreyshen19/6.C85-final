@@ -50,7 +50,7 @@
             onEachFeature: onEachFeature
         }).addTo(map);
 
-        // map.fitBounds(choroplethLayer.getBounds());
+        map.fitBounds(choroplethLayer.getBounds());
     }
 
     $: {
