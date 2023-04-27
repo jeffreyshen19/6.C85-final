@@ -53,6 +53,8 @@
         return { index: i , country: "Honduras" }
     })
 
+    let img_intro_src = "images/intro.jpg";
+
     // update indices for scrolling here 
     const index_intro = 0;
     const index_deforestation_grid = index_intro + 1; // this is the starting index 
@@ -90,6 +92,7 @@
         </div>
 
         <div class="chartBackground" style:opacity={index == index_intro ? 1 : 0}>
+            <img src={img_intro_src} alt="Deforestation in Honduras" class="image" />
         </div>
 
         <div class="chartBackground" style:opacity={index >= index_deforestation_grid && index < index_forest_cover ? 1 : 0}>
@@ -219,10 +222,8 @@
     </div>
   
     <div class="foreground" slot="foreground">
-        <section> 
-            <div class = "text">
-                Intro slide
-            </div>
+        <section class = "title"> 
+            <h1>THE IMPACT OF DEFORESTATION ON CENTRAL AMERICA MIGRATION</h1>
         </section>
         <section> 
             <div class = "text">
@@ -329,14 +330,24 @@
 		justify-content:center;
 		align-items:center;
 		position:absolute;
+        transition: opacity 0.4s;
 	}
 
     
   
     .foreground {
       height: auto;
+      width: 100vw;
+      display: flex;
+      flex-direction: column;
+      align-items:flex-end;
       position: relative;
-      float: right;
+    }
+
+    .image {
+        width: 100vw;
+        height:  100vh;
+        opacity: .25;
     }
   
     .progress-bars {
@@ -371,5 +382,20 @@
     .text h3{
         margin: 0;
         margin-bottom: 5px;
+    }
+
+    h1 {
+        font-size: 3em;
+        width: 60vw;
+        line-height: 1.5;
+    }
+
+    .title {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 90vw;
+        text-align: center;
+        margin-top: 10vh;
     }
 </style>
