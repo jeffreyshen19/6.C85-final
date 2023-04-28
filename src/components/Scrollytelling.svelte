@@ -36,15 +36,27 @@
     const wfpDepartments = new Set(['1184', '901730', 'GT20', '1193', 'GT12', '901742', 'GT13', '901726', 'GT16', '1197', '1185', '901732']);
 
     const GTlist=Array(100).fill().map((_,i)=>{
-        return { index: i , country: "Guatemala" }
+        return { index: i , country: "Guatemala", year: 2000}
     })
 
     const ESlist=Array(100).fill().map((_,i)=>{
-        return { index: i , country: "El Salvador" }
+        return { index: i , country: "El Salvador", year: 2000 }
     })
 
     const HDlist=Array(100).fill().map((_,i)=>{
-        return { index: i , country: "Honduras" }
+        return { index: i , country: "Honduras", year: 2000}
+    })
+
+    const GTlist1=Array(100).fill().map((_,i)=>{
+        return { index: i , country: "Guatemala", year: 2021}
+    })
+
+    const ESlist1=Array(100).fill().map((_,i)=>{
+        return { index: i , country: "El Salvador", year: 2021 }
+    })
+
+    const HDlist1=Array(100).fill().map((_,i)=>{
+        return { index: i , country: "Honduras", year: 2021}
     })
 
     let img_intro_src = "images/intro.jpg";
@@ -88,45 +100,94 @@
             <img src={img_intro_src} alt="Deforestation in Honduras" class="image" />
         </div>
 
-        <div class="chartBackground" style:opacity={index >= index_deforestation_grid && index < index_forest_cover ? 1 : 0}>
-            <div style = "display: grid; grid-gap: 2px; grid-template-columns:auto auto auto auto auto auto auto auto auto auto;">
-                {#each GTlist as item}
-                    <GridItem {item}/>
-                {/each}
-                <div style = "text">
-                    Hi
+        <div class="chartBackground" style:opacity={index == index_deforestation_grid ? 1 : 0}>
+            <div class="countryName" style="position: fixed; top: 5vh; left: 25vw; z-index: 99; color: #588157;">
+                Forest cover (%) in 2000
+            </div>
+            <div class="chartBackground">
+                <div>
+                    <div style = "display: grid; grid-gap: 2px; grid-template-columns:auto auto auto auto auto auto auto auto auto auto;">
+                        {#each GTlist as item}
+                            <GridItem {item}/>
+                        {/each}
+                    </div>
+                    <div class = "countryName">
+                        Guatemala 
+                    </div>
+                    <div class = "countryName" style="color: #588157">
+                        70% 
+                    </div>
                 </div>
-            </div>
-            <div style = "display: grid; grid-gap: 2px; grid-template-columns:auto auto auto auto auto auto auto auto auto auto;">
-                {#each ESlist as item}
-                    <GridItem {item}/>
-                {/each}
-            </div>
-            <div style = "display: grid; grid-gap: 2px; grid-template-columns:auto auto auto auto auto auto auto auto auto auto;">
-                {#each HDlist as item}
-                    <GridItem {item}/>
-                {/each}
+                <div>
+                    <div style = "display: grid; grid-gap: 2px; grid-template-columns:auto auto auto auto auto auto auto auto auto auto;">
+                        {#each ESlist as item}
+                            <GridItem {item}/>
+                        {/each}        
+                    </div>
+                    <div class = "countryName">
+                        El Salvador 
+                    </div>
+                    <div class = "countryName" style="color: #588157">
+                        48% 
+                    </div>
+                </div>
+                <div style="margin-right: 25vw">
+                    <div style = "display: grid; grid-gap: 2px; grid-template-columns:auto auto auto auto auto auto auto auto auto auto;">
+                        {#each HDlist as item}
+                            <GridItem {item}/>
+                        {/each}
+                    </div>
+                    <div class = "countryName">
+                        Honduras
+                    </div>
+                    <div class = "countryName" style="color: #588157">
+                        60% 
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="chartBackground" style:opacity={index >= index_deforestation_grid && index < index_forest_cover ? 1 : 0}>
-            <div style = "display: grid; grid-gap: 2px; grid-template-columns:auto auto auto auto auto auto auto auto auto auto;">
-                {#each GTlist as item}
-                    <GridItem {item}/>
-                {/each}
-                <div style = "text">
-                    Hi
+        <div class="chartBackground" style:opacity={index == index_deforestation_grid + 1 ? 1 : 0}>
+            <div class="countryName" style="position: fixed; top: 5vh; left: 25vw; z-index: 99; color: #588157;">
+                Forest cover (%) in 2021
+            </div>
+            <div>
+                <div style = "display: grid; grid-gap: 2px; grid-template-columns:auto auto auto auto auto auto auto auto auto auto;">
+                    {#each GTlist1 as item}
+                        <GridItem {item}/>
+                    {/each}
+                </div>
+                <div class = "countryName">
+                    Guatemala 
+                </div>
+                <div class = "countryName" style="color: #588157">
+                    49% <span style="font-size: 15px; color: red"> (-21%)</span> 
                 </div>
             </div>
-            <div style = "display: grid; grid-gap: 2px; grid-template-columns:auto auto auto auto auto auto auto auto auto auto;">
-                {#each ESlist as item}
-                    <GridItem {item}/>
-                {/each}
+            <div>
+                <div style = "display: grid; grid-gap: 2px; grid-template-columns:auto auto auto auto auto auto auto auto auto auto;">
+                    {#each ESlist1 as item}
+                        <GridItem {item}/>
+                    {/each}        
+                </div>
+                <div class = "countryName">
+                    El Salvador 
+                </div>
+                <div class = "countryName" style="color: #588157">
+                    40% <span style="font-size: 15px; color: red"> (-8%)</span> 
+                </div>
             </div>
-            <div style = "display: grid; grid-gap: 2px; grid-template-columns:auto auto auto auto auto auto auto auto auto auto;">
-                {#each HDlist as item}
-                    <GridItem {item}/>
-                {/each}
+            <div style="margin-right: 25vw">
+                <div style = "display: grid; grid-gap: 2px; grid-template-columns:auto auto auto auto auto auto auto auto auto auto;">
+                    {#each HDlist1 as item}
+                        <GridItem {item}/>
+                    {/each}
+                </div>
+                <div class = "countryName">
+                    Honduras
+                </div><div class = "countryName" style="color: #588157">
+                    44% <span style="font-size: 15px; color: red"> (-16%)</span> 
+                </div>
             </div>
         </div>
 
@@ -220,12 +281,12 @@
         </section>
         <section> 
             <div class = "text">
-                First grid
+                The Northern Central America countries, namely Honduras, Guatemala and El Savador, used to have at least 48% of their total land area covered by forests.
             </div>
         </section>
         <section> 
             <div class = "text">
-                Second grid
+                Over the two decades from 2000 - 2021, deforestation, both a cause and a consequence of climate change, becomes more prevalent in regions of Honduras, Guatemala and El Savador. 
             </div>
         </section>
         <section>
@@ -313,12 +374,13 @@
         height: 100vh;
         position: relative;
     }
+    
 
     .chartBackground{
-		background:white;
-		display:flex;
-        flex-wrap:wrap;	
-		flex-direction:column;
+		background: whitesmoke;
+		display:grid;
+        grid-gap: 5vw;
+        grid-template-columns: auto auto auto;
 		height:100vh;
         width:100vw;
 		justify-content:center;
@@ -339,7 +401,7 @@
     }
 
     .image {
-        width: 100vw;
+        width: 110vw;
         height:  100vh;
         opacity: .25;
     }
@@ -391,5 +453,13 @@
         width: 90vw;
         text-align: center;
         margin-top: 10vh;
+    }
+
+    .countryName {
+        font-size: 30px; 
+        font-weight: bold; 
+        letter-pacing: 3px; 
+        text-align: center; 
+        line-height: 2;
     }
 </style>
