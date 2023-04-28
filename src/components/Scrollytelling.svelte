@@ -4,6 +4,7 @@
     import Basemap from "./Basemap.svelte";
     import Raster from "./Raster.svelte";
     import BarChart from "./BarChart.svelte";
+    import HorizontalBarChart from "./HorizontalBarChart.svelte";
     import Table from "./Table.svelte";
     import GridItem from "./GridItem.svelte";
     import departments from "../geojson/departments.json";
@@ -189,7 +190,7 @@
             }
         />
 
-        <!-- <BarChart 
+        <HorizontalBarChart 
             visible={index > 6}
             data={[
                 ["Alta Verapaz, GT", 0.05660377358490566],
@@ -206,11 +207,11 @@
                 ["Chiquimula, GT", 0.0],
             ]}
             highlighted = {[0, 1]}
-            yAxisLabel="Percent of Respondents"
-            yTicks={[0, 0.02, 0.04, 0.06, 0.08, 0.1]}
-            formatYTick={(d) => (d * 100) + "%"}
+            xAxisLabel="Percent of Respondents"
+            xTicks={[0, 0.02, 0.04, 0.06, 0.08, 0.1]}
+            formatXTick={(d) => (d * 100) + "%"}
             title="External migration due to the direct impact of a natural hazard, by department"
-        /> -->
+        />
 
     </div>
   
