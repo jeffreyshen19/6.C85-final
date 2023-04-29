@@ -37,18 +37,31 @@
     const wfpDepartments = new Set(['1184', '901730', 'GT20', '1193', 'GT12', '901742', 'GT13', '901726', 'GT16', '1197', '1185', '901732']);
 
     const GTlist=Array(100).fill().map((_,i)=>{
-        return { index: i , country: "Guatemala" }
+        return { index: i , country: "Guatemala", year: 2000}
     })
 
     const ESlist=Array(100).fill().map((_,i)=>{
-        return { index: i , country: "El Salvador" }
+        return { index: i , country: "El Salvador", year: 2000 }
     })
 
     const HDlist=Array(100).fill().map((_,i)=>{
-        return { index: i , country: "Honduras" }
+        return { index: i , country: "Honduras", year: 2000}
+    })
+
+    const GTlist1=Array(100).fill().map((_,i)=>{
+        return { index: i , country: "Guatemala", year: 2021}
+    })
+
+    const ESlist1=Array(100).fill().map((_,i)=>{
+        return { index: i , country: "El Salvador", year: 2021 }
+    })
+
+    const HDlist1=Array(100).fill().map((_,i)=>{
+        return { index: i , country: "Honduras", year: 2021}
     })
 
     let img_intro_src = "images/intro.jpg";
+    let img_livelihood = "images/livelihood.jpg";
 
     // update indices for scrolling here 
     const index_intro = 0;
@@ -56,6 +69,7 @@
     const index_forest_cover = index_deforestation_grid + 2; // meaning index_deforestation_grid part has two slides 
     const index_food_security = index_forest_cover + 3; 
     const index_table = index_food_security + 3;
+    const index_livelihood = index_table + 5;
 </script>
 
 
@@ -89,45 +103,94 @@
             <img src={img_intro_src} alt="Deforestation in Honduras" class="image" />
         </div>
 
-        <div class="chartBackground" style:opacity={index >= index_deforestation_grid && index < index_forest_cover ? 1 : 0}>
-            <div style = "display: grid; grid-gap: 2px; grid-template-columns:auto auto auto auto auto auto auto auto auto auto;">
-                {#each GTlist as item}
-                    <GridItem {item}/>
-                {/each}
-                <div style = "text">
-                    Hi
+        <div class="chartBackground" style:opacity={index == index_deforestation_grid ? 1 : 0}>
+            <div class="countryName" style="position: fixed; top: 5vh; left: 25vw; z-index: 99; color: #588157;">
+                Forest cover (%) in 2000
+            </div>
+            <div class="chartBackground">
+                <div>
+                    <div style = "display: grid; grid-gap: 2px; grid-template-columns:auto auto auto auto auto auto auto auto auto auto;">
+                        {#each GTlist as item}
+                            <GridItem {item}/>
+                        {/each}
+                    </div>
+                    <div class = "countryName">
+                        Guatemala 
+                    </div>
+                    <div class = "countryName" style="color: #588157">
+                        70% 
+                    </div>
                 </div>
-            </div>
-            <div style = "display: grid; grid-gap: 2px; grid-template-columns:auto auto auto auto auto auto auto auto auto auto;">
-                {#each ESlist as item}
-                    <GridItem {item}/>
-                {/each}
-            </div>
-            <div style = "display: grid; grid-gap: 2px; grid-template-columns:auto auto auto auto auto auto auto auto auto auto;">
-                {#each HDlist as item}
-                    <GridItem {item}/>
-                {/each}
+                <div>
+                    <div style = "display: grid; grid-gap: 2px; grid-template-columns:auto auto auto auto auto auto auto auto auto auto;">
+                        {#each ESlist as item}
+                            <GridItem {item}/>
+                        {/each}        
+                    </div>
+                    <div class = "countryName">
+                        El Salvador 
+                    </div>
+                    <div class = "countryName" style="color: #588157">
+                        48% 
+                    </div>
+                </div>
+                <div style="margin-right: 25vw">
+                    <div style = "display: grid; grid-gap: 2px; grid-template-columns:auto auto auto auto auto auto auto auto auto auto;">
+                        {#each HDlist as item}
+                            <GridItem {item}/>
+                        {/each}
+                    </div>
+                    <div class = "countryName">
+                        Honduras
+                    </div>
+                    <div class = "countryName" style="color: #588157">
+                        60% 
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="chartBackground" style:opacity={index >= index_deforestation_grid && index < index_forest_cover ? 1 : 0}>
-            <div style = "display: grid; grid-gap: 2px; grid-template-columns:auto auto auto auto auto auto auto auto auto auto;">
-                {#each GTlist as item}
-                    <GridItem {item}/>
-                {/each}
-                <div style = "text">
-                    Hi
+        <div class="chartBackground" style:opacity={index == index_deforestation_grid + 1 ? 1 : 0}>
+            <div class="countryName" style="position: fixed; top: 5vh; left: 25vw; z-index: 99; color: #588157;">
+                Forest cover (%) in 2021
+            </div>
+            <div>
+                <div style = "display: grid; grid-gap: 2px; grid-template-columns:auto auto auto auto auto auto auto auto auto auto;">
+                    {#each GTlist1 as item}
+                        <GridItem {item}/>
+                    {/each}
+                </div>
+                <div class = "countryName">
+                    Guatemala 
+                </div>
+                <div class = "countryName" style="color: #588157">
+                    49% <span style="font-size: 15px; color: red"> (-21%)</span> 
                 </div>
             </div>
-            <div style = "display: grid; grid-gap: 2px; grid-template-columns:auto auto auto auto auto auto auto auto auto auto;">
-                {#each ESlist as item}
-                    <GridItem {item}/>
-                {/each}
+            <div>
+                <div style = "display: grid; grid-gap: 2px; grid-template-columns:auto auto auto auto auto auto auto auto auto auto;">
+                    {#each ESlist1 as item}
+                        <GridItem {item}/>
+                    {/each}        
+                </div>
+                <div class = "countryName">
+                    El Salvador 
+                </div>
+                <div class = "countryName" style="color: #588157">
+                    40% <span style="font-size: 15px; color: red"> (-8%)</span> 
+                </div>
             </div>
-            <div style = "display: grid; grid-gap: 2px; grid-template-columns:auto auto auto auto auto auto auto auto auto auto;">
-                {#each HDlist as item}
-                    <GridItem {item}/>
-                {/each}
+            <div style="margin-right: 25vw">
+                <div style = "display: grid; grid-gap: 2px; grid-template-columns:auto auto auto auto auto auto auto auto auto auto;">
+                    {#each HDlist1 as item}
+                        <GridItem {item}/>
+                    {/each}
+                </div>
+                <div class = "countryName">
+                    Honduras
+                </div><div class = "countryName" style="color: #588157">
+                    44% <span style="font-size: 15px; color: red"> (-16%)</span> 
+                </div>
             </div>
         </div>
 
@@ -191,6 +254,36 @@
         />
 
         <HorizontalBarChart 
+        <div style:opacity={index == index_livelihood ? 1 : 0} style="position: fixed; top: 0; width: 100vw; height: 100vh; transition: opacity 0.4s; align-content: center">
+            <img src={img_livelihood} alt="Deforestation and livelihoods" style="height: 100vh; width: 50vw;" />
+            <div class="text" style="left: 55vw; width: 40vw; line-height: 1.5; text-align: justify; background-color: azure">
+                <h3>Deforestation and its link to loss of livelihoods</h3>
+                One quarter of the global population relies on forest for their livelihoods, including disadvantaged communities and indigenous communities. Deforestation in Guatemala, El Salvador, and Honduras can have significant impacts on the livelihoods of people who rely on forests for their well-being and threatens the local population’s livelihoods, incentivizing many of them to seek labor somewhere else.
+                <br><br>
+                Deforestation can directly cause loss of livelihoods due to impact on industries relying on the forests and indirectly through other consequences of deforestation such as soil erosion and climate change consequences.
+            </div>
+        </div>
+
+        <div style:opacity={index == index_livelihood + 1 ? 1 : 0} style="position: fixed; top: 0; width: 100vw; height: 100vh; transition: opacity 0.4s; align-content: center">
+            <div style="height: 100vh; width: 50vw; overflow: clip;"><img src="/images/direct_forest.png" alt="Deforestation and livelihoods" style="height: 100vh;"/></div>
+            <div class="text" style="left: 55vw; width: 40vw; line-height: 1.5; text-align: justify; background-color: azure">
+                <h3>Deforestation's direct link to loss of livelihoods</h3>
+                The loss of forests can have direct impacts on the availability of natural resources, such as timber and other forest products such as fruits, nuts, and medicinal products. These resources are critical for the livelihoods of people who rely on the sale of these products for their income and sustenance, and hence sustainable forest management and conservation is essential for people working in this sector. 
+                <br><br>
+                Deforestation can also negatively affect eco-tourism in these regions, directly impacting the livelihoods of people who work in the tourism sector. 
+            </div>
+        </div>
+
+        <div style:opacity={index == index_livelihood + 2 ? 1 : 0} style="position: fixed; top: 0; width: 100vw; height: 100vh; transition: opacity 0.4s; align-content: center">
+            <div style="height: 100vh; width: 50vw; overflow: clip;"><img src="/images/indirect_forest.png" alt="Deforestation and livelihoods" style="width: 50vw;"/></div>
+            <div class="text" style="left: 55vw; width: 40vw; line-height: 1.5; text-align: justify; background-color: azure">
+                <h3>Deforestation's indirect link to loss of livelihoods through climate change</h3>
+                <br><br>
+                Deforestation is a significant source of greenhouse gas emissions, which contribute to global warming and climate change, which can in turn disrupt local weather patterns, leading to more frequent and severe natural disasters such as floods and droughts. Floods and droughts can largely impact the agricultural industry which employs large percentages of the population in Guatemala, Honduras, and El Salvador. 
+            </div>
+        </div>
+
+        <!-- <BarChart 
             visible={index > 6}
             data={[
                 ["Alta Verapaz, GT", 0.05660377358490566],
@@ -221,12 +314,12 @@
         </section>
         <section> 
             <div class = "text">
-                First grid
+                The Northern Central America countries, namely Honduras, Guatemala and El Savador, used to have at least 48% of their total land area covered by forests.
             </div>
         </section>
         <section> 
             <div class = "text">
-                Second grid
+                Over the two decades from 2000 - 2021, deforestation, both a cause and a consequence of climate change, becomes more prevalent in regions of Honduras, Guatemala and El Savador. 
             </div>
         </section>
         <section>
@@ -307,6 +400,25 @@
             <div class = "text">
                 Adding a graph here 
             </div>
+        <section>
+            <!-- <div class = "text">
+                Deforestation and livelihoods
+            </div> -->
+        </section>
+        <section>
+            <!-- <div class = "text">
+                Deforestation and livelihoods Pt. 2
+            </div> -->
+        </section>
+        <section>
+            <!-- <div class = "text">
+                Deforestation and livelihoods Pt. 2
+            </div> -->
+        </section>
+        <section>
+            <!-- <div class = "text">
+                Deforestation and livelihoods Pt. 2
+            </div> -->
         </section>
     </div>
 </Scroller>
@@ -331,12 +443,13 @@
         height: 100vh;
         position: relative;
     }
+    
 
     .chartBackground{
-		background:white;
-		display:flex;
-        flex-wrap:wrap;	
-		flex-direction:column;
+		background: whitesmoke;
+		display:grid;
+        grid-gap: 5vw;
+        grid-template-columns: auto auto auto;
 		height:100vh;
         width:100vw;
 		justify-content:center;
@@ -357,7 +470,7 @@
     }
 
     .image {
-        width: 100vw;
+        width: 110vw;
         height:  100vh;
         opacity: .25;
     }
@@ -409,5 +522,13 @@
         width: 90vw;
         text-align: center;
         margin-top: 10vh;
+    }
+
+    .countryName {
+        font-size: 30px; 
+        font-weight: bold; 
+        text-align: center; 
+        line-height: 2;
+        font-family: 'IBM Plex Sans', sans-serif;
     }
 </style>
