@@ -291,6 +291,23 @@
                 In summary, there is some correlation between food insecurity and deforestation, especially in Guatemala, though food insecurity is a major issue across the region, and in areas with low deforestation.
             </div>
         </section>
+
+        <section>
+            <div class = "text">
+                <h3>Deforestation & Natural Disaster </h3>
+                Deforestation leads to excess flooding, along with other natural disasters caused by soil erosion and climate change as a result of deforestation. As trees help to control flooding, tree loss can cause disastrous floods. In 2020, 2 category 4 hurricanes in Central America led to landfall, and as a result, 1.5 million central Americans were displaced.
+            </div>
+        </section>
+        <section>
+            <div class = "text">
+                In addition, deforestation leads to drought, as the loss of tree coverage decreases a region’s ability to contain moisture. According to United States Institute of Peace, farmers in Central America have experienced multiple droughts since 2014, resulting in crop losses of 70 percent or more during some harvests and often affecting consecutive growing seasons. These natural disasters have caused people to leave their homelands. 
+            </div>
+        </section>
+        <section>
+            <div class = "text">
+                Adding a graph here 
+            </div>
+        </section>
     </div>
 </Scroller>
 
