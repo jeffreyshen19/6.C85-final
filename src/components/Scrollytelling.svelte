@@ -37,27 +37,39 @@
     const wfpDepartments = new Set(['1184', '901730', 'GT20', '1193', 'GT12', '901742', 'GT13', '901726', 'GT16', '1197', '1185', '901732']);
 
     const GTlist=Array(100).fill().map((_,i)=>{
-        return { index: i , country: "Guatemala", year: 2000}
+        return { index: i , country: "Guatemala", year: 2000, type: "tree" }
     })
 
     const ESlist=Array(100).fill().map((_,i)=>{
-        return { index: i , country: "El Salvador", year: 2000 }
+        return { index: i , country: "El Salvador", year: 2000, type: "tree" }
     })
 
     const HDlist=Array(100).fill().map((_,i)=>{
-        return { index: i , country: "Honduras", year: 2000}
+        return { index: i , country: "Honduras", year: 2000, type: "tree" }
     })
 
     const GTlist1=Array(100).fill().map((_,i)=>{
-        return { index: i , country: "Guatemala", year: 2021}
+        return { index: i , country: "Guatemala", year: 2021, type: "tree" }
     })
 
     const ESlist1=Array(100).fill().map((_,i)=>{
-        return { index: i , country: "El Salvador", year: 2021 }
+        return { index: i , country: "El Salvador", year: 2021, type: "tree" }
     })
 
     const HDlist1=Array(100).fill().map((_,i)=>{
-        return { index: i , country: "Honduras", year: 2021}
+        return { index: i , country: "Honduras", year: 2021, type: "tree" }
+    })
+
+    const GTlist2=Array(100).fill().map((_,i)=>{
+        return { index: i , country: "Guatemala", year: 2021, type: "people" }
+    })
+
+    const ESlist2=Array(100).fill().map((_,i)=>{
+        return { index: i , country: "El Salvador", year: 2021, type: "people" }
+    })
+
+    const HDlist2=Array(100).fill().map((_,i)=>{
+        return { index: i , country: "Honduras", year: 2021, type: "people" }
     })
 
     let img_intro_src = "images/intro.jpg";
@@ -70,7 +82,7 @@
     const index_food_security = index_forest_cover + 3; 
     const index_table = index_food_security + 3;
     const index_livelihood = index_table + 5;
-    const index_migration = index_livelihood + 3;
+    const index_migration = index_livelihood + 6;
 </script>
 
 
@@ -263,16 +275,74 @@
         </div>
 
         <div style:opacity={index == index_livelihood + 2 ? 1 : 0} style="position: fixed; top: 0; width: 100vw; height: 100vh; transition: opacity 0.4s; align-content: center">
-            <div style="height: 100vh; width: 50vw; overflow: clip;"><img src="/images/indirect_forest.png" alt="Deforestation and livelihoods" style="width: 50vw;"/></div>
-            <div class="text" style="left: 55vw; width: 40vw; line-height: 1.5; text-align: justify; background-color: azure">
-                <h3>Deforestation's indirect link to loss of livelihoods through climate change</h3>
-                <br><br>
-                Deforestation is a significant source of greenhouse gas emissions, which contribute to global warming and climate change, which can in turn disrupt local weather patterns, leading to more frequent and severe natural disasters such as floods and droughts. Floods and droughts can largely impact the agricultural industry which employs large percentages of the population in Guatemala, Honduras, and El Salvador. 
+            <img src="/images/flood.jpg" alt="Aerial footage of Iota flood devastation in Honduras" style="width: 100vw;"/>
+        </div>
+
+        <div class="chartBackground" style:opacity={index == index_livelihood + 3 ? 1 : 0}>
+            <div class="countryName" style="position: fixed; top: 5vh; left: 8vw; z-index: 99; color: #588157;">
+                Share of employment in agriculture, forestry and fishing (%) in 2021
+            </div>
+            <div class="chartBackground" style="position: fixed; top: 5vh; left: 0vw; z-index: 99; background: transparent; width: 100vw;">
+                <div>
+                    <div style = "display: grid; grid-gap: 2px; row-gap: 15px; grid-template-columns:auto auto auto auto auto auto auto auto auto auto;">
+                        {#each GTlist2 as item}
+                            <GridItem {item}/>
+                        {/each}
+                    </div>
+                    <div class = "countryName">
+                        Guatemala 
+                    </div>
+                    <div class = "countryName" style="color: #588157">
+                        29.2% 
+                    </div>
+                </div>
+                <div>
+                    <div style = "display: grid; grid-gap: 2px; row-gap: 15px; grid-template-columns:auto auto auto auto auto auto auto auto auto auto;">
+                        {#each ESlist2 as item}
+                            <GridItem {item}/>
+                        {/each}        
+                    </div>
+                    <div class = "countryName">
+                        El Salvador 
+                    </div>
+                    <div class = "countryName" style="color: #588157">
+                        15.2% 
+                    </div>
+                </div>
+                <div style="margin-right: 25vw">
+                    <div style = "display: grid; grid-gap: 2px; row-gap: 15px;  grid-template-columns:auto auto auto auto auto auto auto auto auto auto;">
+                        {#each HDlist2 as item}
+                            <GridItem {item}/>
+                        {/each}
+                    </div>
+                    <div class = "countryName">
+                        Honduras
+                    </div>
+                    <div class = "countryName" style="color: #588157">
+                        24.8% 
+                    </div>
+                </div>
             </div>
         </div>
 
+        <div class="chartBackground" style:opacity={index == index_livelihood + 4 ? 1 : 0}>
+            <div class="countryName" style="position: fixed; top: 5vh; left: 25vw; z-index: 99; color: #86bbd8;">
+                Number of floods from 2008 -  2021
+            </div>
+            <div style="position: fixed; top: 15vh; left: 5vw; z-index: 99;">
+               <img style="width: 60vw;" src="/images/countrymap.png" alt="Map showing number of floods in Guatemala (27), Honduras (28) and El Salvador (19) from 2008 to 2021)">
+            </div>
+        </div>
 
-
+        <div class="chartBackground" style:opacity={index == index_livelihood + 5 ? 1 : 0}>
+            <div class="countryName" style="position: fixed; top: 5vh; left: 25vw; z-index: 99; color: #86bbd8;">
+                Number of people displaced by floods from 2008 -  2021
+            </div>
+            <div style="position: fixed; top: 15vh; left: 5vw; z-index: 99;">
+               <img style="width: 60vw;" src="/images/flood_displacement.png" alt="Map showing people displaced by floods in Guatemala (170437), Honduras (96033) and El Salvador (5708) from 2008 to 2021)">
+            </div>
+        </div>
+        
         <HorizontalBarChart 
             visible={index == index_migration}
             data = {[
@@ -426,13 +496,13 @@
         </section>
         <section style="left: 5vw; width: 100vw; display: flex; align-items: center; justify-content: center;">
             <div class="text" style="width: 60vw; line-height: 1.5; text-align: justify; background: rgba(255, 255, 255, .5);">
-                <h3>Deforestation and its link to loss of livelihoods</h3>
+                <h3 style="text-align: center;">Deforestation and its link to loss of livelihoods</h3>
                 One quarter of the global population relies on forest for their livelihoods, including disadvantaged communities and indigenous communities. Deforestation in Guatemala, El Salvador, and Honduras can have significant impacts on the livelihoods of people who rely on forests for their well-being and threatens the local population’s livelihoods, incentivizing many of them to seek labor somewhere else.
                 <br><br>
                 Deforestation can directly cause loss of livelihoods due to impact on industries relying on the forests and indirectly through other consequences of deforestation such as soil erosion and climate change consequences.
             </div>
         </section>
-        <section style="width: 100vw;height: 100vh;left: 3vw;display: flex; justify-content: center; align-items: end;">
+        <section style="width: 100vw;height: 100vh;left: 3vw;display: flex; justify-content: center; align-items: center;">
             <div style="width: 100vw; display: flex; align-items: center; justify-content: center;">
                 <div class = container>
                     <div class = card>
@@ -468,27 +538,33 @@
                     </div>    
                 </div>
             </div>
-           <div class = "text" style="width: 60vw; line-height: 1.5; text-align: justify; background: rgba(255, 255, 255, 0.5); top: 15vh;">
-                <h3>Deforestation's direct link to loss of livelihoods</h3>
+            <div class = "text" style="width: 60vw; line-height: 1.5; text-align: justify; background: rgba(255, 255, 255, 0.5); top: 12vh;">
+                <h3 style="text-align: center;">Deforestation's direct link to loss of livelihoods</h3>
                 The loss of forests can have direct impacts on the availability of natural resources, such as timber and other forest products such as fruits, nuts, and medicinal products. These resources are critical for the livelihoods of people who rely on the sale of these products for their income and sustenance, and hence deforestation can directly impact the livelihoods of these people. Hover on the images below to learn more.
             </div>
         </section>
-        <section>
-        </section>
-        <section>
-            <div class = "text">
-                <h3>Deforestation & Natural Disaster </h3>
-                Deforestation leads to excess flooding, along with other natural disasters caused by soil erosion and climate change as a result of deforestation. As trees help to control flooding, tree loss can cause disastrous floods. In 2020, 2 category 4 hurricanes in Central America led to landfall, and as a result, 1.5 million central Americans were displaced.
+        <section style="left: 5vw; width: 100vw; display: flex; align-items: center; justify-content: center;">
+            <div class="text" style="width: 60vw; line-height: 1.5; text-align: justify; background: rgba(255, 255, 255, .9);">
+                <h3 style="text-align: center;">Deforestation's indirect link to loss of livelihoods through climate change</h3>
+                Deforestation is a significant source of greenhouse gas emissions, which contribute to global warming and climate change, which can in turn disrupt local weather patterns, leading to more frequent and severe natural disasters such as floods and droughts. 
             </div>
         </section>
         <section>
             <div class = "text">
-                In addition, deforestation leads to drought, as the loss of tree coverage decreases a region’s ability to contain moisture. According to United States Institute of Peace, farmers in Central America have experienced multiple droughts since 2014, resulting in crop losses of 70 percent or more during some harvests and often affecting consecutive growing seasons. These natural disasters have caused people to leave their homelands. 
+                <h3 style="text-align: center;">Climate change and the agriculture, forestry and fishing industries</h3>
+                The agriculture, forestry, and fishing industries in Guatemala, El Salvador, and Honduras provide income and food for millions of people in the region, but they are also highly vulnerable to the impacts of deforestation and climate change. Rising temperatures, changes in precipitation patterns, and more frequent extreme weather events such as floods and droughts are already affecting these industries, leading to crop failures, reduced yields, and damage to infrastructure.
+            </div>
+        </section>
+        <section style="width: 100vw; display: flex; align-items: center; justify-content: end;">
+            <div class = "text" style="line-height: 1.5; width: 30vw;">
+                <h3>Deforestation and Flooding </h3>
+                Deforestation reduces the soil's ability to absorb and store water, leading to rapid runoff during heavy rains and increasing the risk of flooding. Trees also play a critical role in intercepting rainfall and reducing the impact of raindrops on the soil, and their removal can exacerbate soil compaction and reduce the water storage capacity in the landscape. 
+                The loss of trees also makes hillsides and slopes more vulnerable to erosion and landslides, leading to blockages in rivers and streams that increase the risk of flooding.
             </div>
         </section>
         <section>
             <div class = "text">
-                Adding a graph here 
+                The immediate effect of floods led to the displacement of over a million people in the period of 2008 to 2021 and the effects of floods, including the loss of property, livelihoods, and access to basic services, can be long-lasting. As a result, people may turn to external migration as their last resort for a chance to survive. 
             </div>
         </section>
         <section>
@@ -533,9 +609,11 @@
         box-sizing : border-box;
     }
 
+
     :global(body){
         padding: 0;
         margin: 0;
+        overflow-x: hidden;
     }
 
     :global(h1, h2, h3, h4, h5, h6){
@@ -652,8 +730,9 @@
 
     .container .card {
     position: relative;
-    max-width : 30vw;
-    height : 215px;  
+    /* max-width : 30vw; */
+    width: 300px;
+    height : 175px;  
     background-color : #fff;
     margin : 30px 10px;
     padding : 20px 15px;
@@ -665,7 +744,7 @@
     border-radius : 15px;
     }
     .container .card:hover {
-    height : 50vh;    
+    height : 60vh;    
     }
 
 

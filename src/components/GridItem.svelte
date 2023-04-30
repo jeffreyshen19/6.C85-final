@@ -1,7 +1,12 @@
 <script>
+	import People from "./icons/People.svelte";
 	import Tree from "./icons/Tree.svelte";
     
     export let item;
+
+	const people = item.type == "people";
+
+	const agri_people = item.country == "Guatemala" ? item.index < 29 : item.country == "Honduras" ? item.index < 25 : item.country == "El Salvador" ? item.index < 15.2 : false;
 
 	const tree = item.country == "Guatemala" ? item.index < 70 : item.country == "Honduras" ? item.index < 60 : item.country == "El Salvador" ? item.index < 48 : false;
 
@@ -22,7 +27,15 @@
 	}
 </style>
 
-{#if tree & before}
+{#if people & agri_people}
+	<div class=item style={`width: 3vh; height: 3vh; filter: invert(33%) sepia(44%) saturate(462%) hue-rotate(80deg) brightness(92%) contrast(86%);`}>
+		<People />
+	</div>
+{:else if people & !agri_people}
+	<div class=item style={`width: 3vh; height: 3vh;  filter: grayscale(100%); opacity: 0.2;`}>
+		<People />
+	</div>
+{:else if tree & before}
     <div class=item style={`filter: invert(33%) sepia(44%) saturate(462%) hue-rotate(80deg) brightness(92%) contrast(86%);`}>
         <Tree />
     </div>
