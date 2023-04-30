@@ -11,56 +11,63 @@
     export let formatXTick = (d) => d;
     export let visible;
 
-	const padding = { top: 20, right: 15, bottom: 175, left: 25 };
+	const padding = { top: 20, right: 30, bottom: 50, left: 250 };
 
-	let width = 500;
-	let height = 350;
+	let width = 700;
+	let height = 400;
 
 	const yScale = d3.scaleLinear()
 		.domain([0, data.length])
-		.range([height - padding.bottom, padding.top]);
+		.range([padding.top, height - padding.bottom]);
 
 	const xScale = d3.scaleLinear()
 		.domain([0, Math.max.apply(null, xTicks)])
-		.range([padding.left, width - padding.right]);
+		.range([0, width - padding.right - padding.left]);
 
 	const innerHeight = height - (padding.top + padding.bottom);
-	const barHeight = innerHeight / data.length;
+	const barHeight = innerHeight / data.length - 4;
 </script>
 
 <div class = "wrapper" style:opacity={visible ? 1 : 0}>
     <h2>{title}</h2>
     <div class="chart" bind:clientWidth={width} bind:clientHeight={height}>
         <svg>
-            <!-- x axis -->
-            <g class="axis x-axis">
-                {#each xTicks as tick}
-                    <g class="tick tick-{tick}" transform="translate({padding.bottom}, {xScale(tick)})">
-                        <line y2="100%"></line>
-                        <text x="-4">{formatXTick(tick)}</text>
+            <g class="axis y-axis">
+                {#each data as point, i}
+                    <g class="tick" transform="translate({padding.left}, {yScale(i)})">
+                        <text style:text-anchor="end">{point[0]}</text>
                     </g>
                 {/each}
 
-                <g class = "x-axis-label" transform="translate(10, {width / 2}) rotate(-90)">
-                    <text y="{(width - padding.left - padding.right)/2}" style:text-anchor="middle">{xAxisLabel}</text>
-                </g>
             </g>
-            <!-- y axis -->
+
+            <!-- x axis -->
             <g class="axis x-axis">
-                {#each data as point, i}
-                    <g class="tick" transform="translate({padding.bottom + yScale(i) + barHeight / 2},{width - padding.left + 12})">
-                        <text transform="rotate(-50)" dy=".4em" dx="0.3em"  style:text-anchor="end">{point[0]}</text>
+                {#each xTicks as tick}
+                    <g class="tick tick-{tick}" transform="translate({padding.left + xScale(tick) + 10},{height - padding.bottom + 12})">
+                        <line y1="-5%" y2="-100%"></line>
+                        <text y="-4">{formatXTick(tick)}</text>
                     </g>
                 {/each}
+
+                <g class = "x-axis-label" transform="translate({padding.left + (width - padding.left - padding.right)/2}, {height - padding.bottom + 30})">
+                    <text style:text-anchor="middle">{xAxisLabel}</text>
+                </g>
+
+                <!-- {#each data as point, i}
+                    <g class="tick" transform="translate({padding.left + xScale(i) + barWidth / 2},{height - padding.bottom + 12})">
+                        <text transform="rotate(-50)" dx=".4em" dy="0.3em"  style:text-anchor="end">{point[0]}</text>
+                    </g>
+                {/each} -->
             </g>
     
             <g class='bars'>
                 {#each data as point, i}
                     <rect
-                        y="{yScale(i) + 2 + padding.bottom}"
-                        x="{xScale(point[1])}"
-                        height="{barHeight - 4}"
-                        width="{xScale(0) - yScale(point[1])}"
+                        y="{yScale(i) - barHeight + 3}"
+                        x="{padding.left + 10}"
+                        height="{barHeight}"
+                        width="{xScale(point[1])}"
                         stroke={highlightedIndexes.has(i) ? "#ede99d" : "none"} 
                     ></rect>
                 {/each}
@@ -80,17 +87,17 @@
         left: 50%;
         transform: translate(-50%, -50%);
         width: 100%;
-		max-width: 500px;
+		max-width: 700px;
         transition: opacity 0.4s;
     }
 
 	svg {
 		position: relative;
 		width: 100%;
-		height: 350px;
+		height: 400px;
 	}
 
-	.tick, .y-axis-label     {
+	.tick, .x-axis-label     {
 		font-family: Helvetica, Arial;
 		font-size: .725em;
 		font-weight: 200;

@@ -70,6 +70,7 @@
     const index_food_security = index_forest_cover + 3; 
     const index_table = index_food_security + 3;
     const index_livelihood = index_table + 5;
+    const index_migration = index_livelihood + 3;
 </script>
 
 
@@ -253,7 +254,6 @@
             }
         />
 
-        <HorizontalBarChart 
         <div style:opacity={index == index_livelihood ? 1 : 0} style="position: fixed; top: 0; width: 100vw; height: 100vh; transition: opacity 0.4s; align-content: center">
             <img src={img_livelihood} alt="Deforestation and livelihoods" style="height: 100vh; width: 50vw;" />
             <div class="text" style="left: 55vw; width: 40vw; line-height: 1.5; text-align: justify; background-color: azure">
@@ -283,6 +283,35 @@
             </div>
         </div>
 
+        <HorizontalBarChart 
+            visible={index == index_migration}
+            data = {[
+                ["For a better job, salary or working conditions", 1239],
+                ["Unemployment", 618],
+                ["Lack of money to cover other basic needs", 351],
+                ["To send remittance", 277],
+                ["Lack of money to buy food", 234],
+                ["Family reunification", 137],
+                ["Unsafety", 118],
+                ["For study", 80],
+                ["Other", 70],
+                ["Deterioration of livelihoods due to natural hazards", 40],
+                ["Adventure Tourism", 39],
+                ["By the direct impact of a natural hazard", 15],
+                ["For health", 15],
+                ["Don't Know / No Response", 9],
+                ["Domestic violence", 6],
+                ["For cultural reasons or custom", 5],
+                ["Due to loss of land due to processes of land use change", 4],
+            ]}
+            title="Reasons for External Migration"
+            xAxisLabel="Number of Respondents"
+            xTicks={[0, 200, 400, 600, 800, 1000, 1200, 1400]}
+            formatXTick={(d) => d.toLocaleString()}
+            highlighted={[]}
+        /> 
+        
+
         <!-- <BarChart 
             visible={index > 6}
             data={[
@@ -304,7 +333,7 @@
             xTicks={[0, 0.02, 0.04, 0.06, 0.08, 0.1]}
             formatXTick={(d) => (d * 100) + "%"}
             title="External migration due to the direct impact of a natural hazard, by department"
-        />
+        />-->
 
     </div>
   
