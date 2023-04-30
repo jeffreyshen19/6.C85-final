@@ -11,7 +11,7 @@
     export let formatXTick = (d) => d;
     export let visible;
 
-	const padding = { top: 20, right: 30, bottom: 50, left: 250 };
+	const padding = { top: 20, right: 30, bottom: 50, left: 270 };
 
 	let width = 700;
 	let height = 400;
@@ -51,7 +51,7 @@
                 {/each}
 
                 <g class = "x-axis-label" transform="translate({padding.left + (width - padding.left - padding.right)/2}, {height - padding.bottom + 30})">
-                    <text style:text-anchor="middle">{xAxisLabel}</text>
+                    <text style:text-anchor="middle" dominant-baseline="middle">{xAxisLabel}</text>
                 </g>
 
                 <!-- {#each data as point, i}
@@ -64,7 +64,7 @@
             <g class='bars'>
                 {#each data as point, i}
                     <rect
-                        y="{yScale(i) - barHeight + 3}"
+                        y="{yScale(i) - (10 + barHeight) / 2}"
                         x="{padding.left + 10}"
                         height="{barHeight}"
                         width="{xScale(point[1])}"
@@ -99,8 +99,9 @@
 
 	.tick, .x-axis-label     {
 		font-family: Helvetica, Arial;
-		font-size: .725em;
+		font-size: 12px;
 		font-weight: 200;
+        text-align: top;
 	}
 
 	.tick line {

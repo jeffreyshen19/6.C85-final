@@ -283,6 +283,8 @@
             </div>
         </div>
 
+
+
         <HorizontalBarChart 
             visible={index == index_migration}
             data = {[
@@ -302,7 +304,7 @@
                 ["Don't Know / No Response", 9],
                 ["Domestic violence", 6],
                 ["For cultural reasons or custom", 5],
-                ["Due to loss of land due to processes of land use change", 4],
+                ["Loss of land due to processes of land use change", 4],
             ]}
             title="Reasons for External Migration"
             xAxisLabel="Number of Respondents"
@@ -310,7 +312,28 @@
             formatXTick={(d) => d.toLocaleString()}
             highlighted={[]}
         /> 
-        
+        <HorizontalBarChart 
+            visible={index == index_migration + 1}
+            data = {[
+                ["For a better job, salary or working conditions", 438],
+                ["Unemployment", 174],
+                ["Other", 117],
+                ["Lack of money to cover basic needs (besides food)", 80],
+                ["Lack of money to buy food", 74],
+                ["Adventure Tourism", 53],
+                ["For study", 50],
+                ["Don't Know / No Response", 45],
+                ["For health", 31],
+                ["Deterioration of livelihoods due to natural hazards", 13],
+                ["Unsafety", 5],
+                ["By the direct impact of a natural hazard", 4],
+                ["Loss of land due to processes of land use change", 2],
+            ]}
+            title="Reasons for Internal Migration"
+            xAxisLabel="Number of Respondents"
+            xTicks={[0, 200, 400, 600]}
+            highlighted={[]}
+        /> 
 
         <!-- <BarChart 
             visible={index > 6}
@@ -429,6 +452,18 @@
             <div class = "text">
                 Adding a graph here 
             </div>
+        </section>
+        <section>
+            <div class = "text">
+                Survey data from the World Food Program shows that motivations related to livelihood and food security are among the top 5 of why Central Americans choose to migrate, both externally and internally. 
+            </div>
+        </section>
+        <section>
+            <div class = "text">
+                As deforestation negatively impacts livelihood and food security, it will likely lead to more migration from the affected regions.
+            </div>
+        </section>
+
         <section>
             <!-- <div class = "text">
                 Deforestation and livelihoods
