@@ -255,23 +255,11 @@
         />
 
         <div style:opacity={index == index_livelihood ? 1 : 0} style="position: fixed; top: 0; width: 100vw; height: 100vh; transition: opacity 0.4s; align-content: center">
-            <img src={img_livelihood} alt="Deforestation and livelihoods" style="height: 100vh; width: 50vw;" />
-            <div class="text" style="left: 55vw; width: 40vw; line-height: 1.5; text-align: justify; background-color: azure">
-                <h3>Deforestation and its link to loss of livelihoods</h3>
-                One quarter of the global population relies on forest for their livelihoods, including disadvantaged communities and indigenous communities. Deforestation in Guatemala, El Salvador, and Honduras can have significant impacts on the livelihoods of people who rely on forests for their well-being and threatens the local population’s livelihoods, incentivizing many of them to seek labor somewhere else.
-                <br><br>
-                Deforestation can directly cause loss of livelihoods due to impact on industries relying on the forests and indirectly through other consequences of deforestation such as soil erosion and climate change consequences.
-            </div>
+            <img src="/images/forest.jpg" alt="Forest in Honduras" style="width: 100vw;" />
         </div>
 
         <div style:opacity={index == index_livelihood + 1 ? 1 : 0} style="position: fixed; top: 0; width: 100vw; height: 100vh; transition: opacity 0.4s; align-content: center">
-            <div style="height: 100vh; width: 50vw; overflow: clip;"><img src="/images/direct_forest.png" alt="Deforestation and livelihoods" style="height: 100vh;"/></div>
-            <div class="text" style="left: 55vw; width: 40vw; line-height: 1.5; text-align: justify; background-color: azure">
-                <h3>Deforestation's direct link to loss of livelihoods</h3>
-                The loss of forests can have direct impacts on the availability of natural resources, such as timber and other forest products such as fruits, nuts, and medicinal products. These resources are critical for the livelihoods of people who rely on the sale of these products for their income and sustenance, and hence sustainable forest management and conservation is essential for people working in this sector. 
-                <br><br>
-                Deforestation can also negatively affect eco-tourism in these regions, directly impacting the livelihoods of people who work in the tourism sector. 
-            </div>
+            <img src="/images/forest.jpg" alt="Forest in Honduras" style="width: 100vw;" class="image" />
         </div>
 
         <div style:opacity={index == index_livelihood + 2 ? 1 : 0} style="position: fixed; top: 0; width: 100vw; height: 100vh; transition: opacity 0.4s; align-content: center">
@@ -436,7 +424,57 @@
                 In summary, there is some correlation between food insecurity and deforestation, especially in Guatemala, though food insecurity is a major issue across the region, and in areas with low deforestation.
             </div>
         </section>
-
+        <section style="left: 5vw; width: 100vw; display: flex; align-items: center; justify-content: center;">
+            <div class="text" style="width: 60vw; line-height: 1.5; text-align: justify; background: rgba(255, 255, 255, .5);">
+                <h3>Deforestation and its link to loss of livelihoods</h3>
+                One quarter of the global population relies on forest for their livelihoods, including disadvantaged communities and indigenous communities. Deforestation in Guatemala, El Salvador, and Honduras can have significant impacts on the livelihoods of people who rely on forests for their well-being and threatens the local population’s livelihoods, incentivizing many of them to seek labor somewhere else.
+                <br><br>
+                Deforestation can directly cause loss of livelihoods due to impact on industries relying on the forests and indirectly through other consequences of deforestation such as soil erosion and climate change consequences.
+            </div>
+        </section>
+        <section style="width: 100vw;height: 100vh;left: 3vw;display: flex; justify-content: center; align-items: end;">
+            <div style="width: 100vw; display: flex; align-items: center; justify-content: center;">
+                <div class = container>
+                    <div class = card>
+                        <div class = cardImage>
+                        <img src="/images/timber.webp" alt="People walking through a Guatamalan forest">
+                        </div>
+                        <div class = content>
+                        <h3>Timber harvesting</h3>
+                        <p>The forest industry is an important source of income and employment in these countries. However, illegal logging and deforestation together can lead to conflicts between logging companies and local communities over access to forest resources.</p>
+                        </div>
+                    </div>    
+                </div>
+                <div class = container>
+                    <div class = card>
+                        <div class = cardImage>
+                        <img src="/images/non_timber.webp" alt="People walking through a Guatamalan forest">
+                        </div>
+                        <div class = content>
+                        <h3>Non-timber forest products</h3>
+                        <p> Forests provide a range of non-timber forest products (NTFPs) that can be used for food, medicine, and other purposes. The photo shows xate, a palm leaf exported to the United States for flower arrangements, at a workshop in Uaxactún.</p>
+                        </div>
+                    </div>    
+                </div>
+                <div class = container>
+                    <div class = card>
+                        <div class = cardImage>
+                        <img src="/images/ecotourism.webp" alt="People walking through a Guatamalan forest">
+                        </div>
+                        <div class = content>
+                        <h3>Ecotoursim</h3>
+                        <p>Forests are also an important attraction for ecotourism in these countries. When forests are degraded or destroyed, it can reduce the attractiveness of these areas for tourists, which can have negative impacts on the tourism industry</p>
+                        </div>
+                    </div>    
+                </div>
+            </div>
+           <div class = "text" style="width: 60vw; line-height: 1.5; text-align: justify; background: rgba(255, 255, 255, 0.5); top: 15vh;">
+                <h3>Deforestation's direct link to loss of livelihoods</h3>
+                The loss of forests can have direct impacts on the availability of natural resources, such as timber and other forest products such as fruits, nuts, and medicinal products. These resources are critical for the livelihoods of people who rely on the sale of these products for their income and sustenance, and hence deforestation can directly impact the livelihoods of these people. Hover on the images below to learn more.
+            </div>
+        </section>
+        <section>
+        </section>
         <section>
             <div class = "text">
                 <h3>Deforestation & Natural Disaster </h3>
@@ -489,6 +527,12 @@
 
 
 <style>
+    * { 
+        margin : 0;
+        padding: 0;
+        box-sizing : border-box;
+    }
+
     :global(body){
         padding: 0;
         margin: 0;
@@ -595,4 +639,71 @@
         line-height: 2;
         font-family: 'IBM Plex Sans', sans-serif;
     }
+
+    .container {
+    position : relative;
+    width : 100vw;
+    display : flex;
+    align-items : center;
+    justify-content : center;
+    flex-wrap : wrap;
+    padding : 30px;  
+    }
+
+    .container .card {
+    position: relative;
+    max-width : 30vw;
+    height : 215px;  
+    background-color : #fff;
+    margin : 30px 10px;
+    padding : 20px 15px;
+    
+    display : flex;
+    flex-direction : column;
+    box-shadow : 0 5px 20px rgba(0,0,0,0.5);
+    transition : 0.3s ease-in-out;
+    border-radius : 15px;
+    }
+    .container .card:hover {
+    height : 50vh;    
+    }
+
+
+    .container .card .cardImage {
+    position : relative;
+    width : 260px;
+    height : 260px;
+    
+    top : -40%;
+    left: 8px;
+    box-shadow : 0 5px 20px rgba(0,0,0,0.2);
+    z-index : 1;
+    }
+
+    .container .card .cardImage img {
+    max-width : 100%;
+    border-radius : 15px;
+    }
+
+    .container .card .content {
+    position : relative;
+    top : -140px;
+    padding : 10px 15px;
+    color : #111;
+    text-align : center;
+    
+    visibility : hidden;
+    opacity : 0;
+    transition : 0.3s ease-in-out;
+        
+    }
+
+    .container .card:hover .content {
+    margin-top : 30px;
+    visibility : visible;
+    opacity : 1;
+    transition-delay: 0.2s;
+    
+    }
+
 </style>
