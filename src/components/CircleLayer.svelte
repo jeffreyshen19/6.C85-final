@@ -9,7 +9,7 @@
     export let domain;
 
     let sizeScale;
-    $: if(domain) sizeScale = d3.scaleLinear().range([0, 50000]).domain(domain);
+    $: if(domain) sizeScale = d3.scaleLinear().range([0, 100000]).domain(domain);
 
     export let f; // a method returning the attribute to visualize on the choropleth
     export let visible;

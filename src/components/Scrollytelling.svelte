@@ -381,7 +381,7 @@
         </section>
         <section>
             <div class = "text">
-                Here's the same map, visualized on the department level as the percent of overall area covered by trees. Feel free to hover over the map to see more information.
+                Here's the same map, visualized on the department level as the percent of overall area covered by trees. 
             </div>
         </section>
         <section>

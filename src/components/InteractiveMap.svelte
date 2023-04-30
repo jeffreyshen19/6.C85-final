@@ -92,13 +92,13 @@
             "scaleLabel": "",
             "showScale": false
         },
-        {
-            "domain": [0, 250],
-            "f": (d) => parseInt(d.num_int_migrated),
-            "formatDomain": (d) => isNaN(d) ? "No data" : d,
-            "title": "Number of Internal Migrants", //todo: add clarification that this is from wfp,
-            "scaleLabel": "Number of Internal Migrants"
-        },
+        // {
+        //     "domain": [0, 250],
+        //     "f": (d) => parseInt(d.num_int_migrated),
+        //     "formatDomain": (d) => isNaN(d) ? "No data" : d,
+        //     "title": "Number of Internal Migrants", //todo: add clarification that this is from wfp,
+        //     "scaleLabel": "Number of Internal Migrants"
+        // },
         {
             "domain": [0, 1],
             "f": (d) => parseInt(d.num_int_migrated) / parseInt(d.SURVEYED_SIZE),
@@ -106,13 +106,13 @@
             "title": "Number of Internal Migrants (Per Capita)",
             "scaleLabel": "% of Respondents who Internally Migrated"
         },
-        {
-            "domain": [0, 250],
-            "f": (d) => parseInt(d.num_ext_migrated),
-            "formatDomain": (d) => isNaN(d) ? "No data" : d,
-            "title": "Number of External Migrants",
-            "scaleLabel": "Number of External Migrants"
-        },
+        // {
+        //     "domain": [0, 250],
+        //     "f": (d) => parseInt(d.num_ext_migrated),
+        //     "formatDomain": (d) => isNaN(d) ? "No data" : d,
+        //     "title": "Number of External Migrants",
+        //     "scaleLabel": "Number of External Migrants"
+        // },
         {
             "domain": [0, 1],
             "f": (d) => parseInt(d.num_ext_migrated)  / parseInt(d.SURVEYED_SIZE),
