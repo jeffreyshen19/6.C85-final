@@ -74,15 +74,18 @@
 
     let img_intro_src = "images/intro.jpg";
     let img_livelihood = "images/livelihood.jpg";
+    let img_intro_text = "deforestation_intro.jpeg";
 
     // update indices for scrolling here 
     const index_intro = 0;
-    const index_deforestation_grid = index_intro + 1; // this is the starting index 
+    const index_intro_text = index_intro + 1;
+    const index_deforestation_grid = index_intro_text + 1; // this is the starting index 
     const index_forest_cover = index_deforestation_grid + 2; // meaning index_deforestation_grid part has two slides 
     const index_food_security = index_forest_cover + 3; 
     const index_table = index_food_security + 3;
     const index_livelihood = index_table + 5;
     const index_migration = index_livelihood + 6;
+    const index_conclusion = index_migration + 1;
 </script>
 
 
@@ -114,6 +117,11 @@
 
         <div class="chartBackground" style:opacity={index == index_intro ? 1 : 0}>
             <img src={img_intro_src} alt="Deforestation in Honduras" class="image" />
+        </div>
+
+        <div class="chartBackground" style:opacity={index == index_intro_text ? 1 : 0}>
+            <!-- svelte-ignore a11y-img-redundant-alt -->
+            <img src={"/images/deforestation_intro.jpeg"} alt="Deforestation background image" class="image" />
         </div>
 
         <div class="chartBackground" style:opacity={index == index_deforestation_grid ? 1 : 0}>
@@ -417,10 +425,19 @@
         />-->
 
     </div>
-  
+
+    <div class="chartBackground" style:opacity={index == index_conclusion}>
+        <img src={"\image\deforestation_intro.jpeg"} alt="conclusion" class="image" />
+    </div>
+
     <div class="foreground" slot="foreground">
         <section class = "title"> 
             <h1>THE IMPACT OF DEFORESTATION ON CENTRAL AMERICA MIGRATION</h1>
+        </section>
+        <section class = "title">
+            <div class = "text">
+            <h2>Deforestation has led to increased Central American migration rates. In the past few decades, forestry coverage in El Salvador, Guatemala and Honduras has decreased drastically, which negatively impacted residents’ livelihood, food security and their susceptibility towards natural disasters, such as floods and droughts. Regions with severe deforestation coincide with regions with high migration rates, and as livelihood and food security are commonly ranked as top motivations for migration, people living in heavily deforested locations are also more likely to migrate due to natural disasters. As more people migrate or are displaced externally or internally to urban centers, regional governments are faced with enhanced pressure with rural migrants.</h2>
+            </div>
         </section>
         <section> 
             <div class = "text">
@@ -578,26 +595,16 @@
             </div>
         </section>
 
-        <section>
-            <!-- <div class = "text">
-                Deforestation and livelihoods
-            </div> -->
+        <section class = "title">
+                <div class = "text"> 
+                <h3>As data demonstrates, deforestation in El Salvador, Guatemala and Honduras has led to increased migration rates. Consequences of deforestation, such as loss of livelihood, decreased food security, and more severe flooding and drought, has motivated many Central Americans to start a new life in urban centers or in another country. Millions of people have already migrated due to issues with food security, unemployment and natural disaster, and it is estimated that by 2050, there will be over 10 million Central Americans in urban centers. The status quo presents challenges to urban planners and policy makers. Increased migration could lead to heightened urban design pressure, and loss of workforce and residents in rural regions can further degrade local environments and ecosystems. Therefore, we propose the policy makers and international humanitarian investors to act accordingly:
+                Encourage both domestic and international investment on forest preservation and climate change mitigation; 
+                Provide funds for climate adaptation for affected population, and help reconstruct the regions damaged by natural disasters; 
+                Have increased effort in ensuring employment and food security in regions vulnerable from deforestation; 
+                Adjust urban planning policies to reflect demands induced by future increase in urban population.</h3>
+                </div>
         </section>
-        <section>
-            <!-- <div class = "text">
-                Deforestation and livelihoods Pt. 2
-            </div> -->
-        </section>
-        <section>
-            <!-- <div class = "text">
-                Deforestation and livelihoods Pt. 2
-            </div> -->
-        </section>
-        <section>
-            <!-- <div class = "text">
-                Deforestation and livelihoods Pt. 2
-            </div> -->
-        </section>
+
     </div>
 </Scroller>
 
