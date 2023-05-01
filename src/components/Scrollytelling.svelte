@@ -104,7 +104,7 @@
         bind:clientWidth={width}
         bind:clientHeight={height}
     >
-        <div class="progress-bars">
+        <!-- <div class="progress-bars">
             <p>current section: <strong>{index + 1}/{count}</strong></p>
             <progress value={count ? (index + 1) / count : 0} />
 
@@ -113,7 +113,7 @@
 
             <p>total progress</p>
             <progress value={progress || 0} />
-        </div>
+        </div> -->
 
         <div class="chartBackground" style:opacity={index == index_intro ? 1 : 0}>
             <img src={img_intro_src} alt="Deforestation in Honduras" class="image" />
