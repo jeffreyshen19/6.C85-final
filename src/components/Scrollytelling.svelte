@@ -561,17 +561,6 @@
                 As deforestation negatively impacts livelihood and food security, it will likely lead to more migration from the affected regions.
             </div>
         </section>
-
-        <section class = "title">
-                <div class = "text"> 
-                <h3>As data demonstrates, deforestation in El Salvador, Guatemala and Honduras has led to increased migration rates. Consequences of deforestation, such as loss of livelihood, decreased food security, and more severe flooding and drought, has motivated many Central Americans to start a new life in urban centers or in another country. Millions of people have already migrated due to issues with food security, unemployment and natural disaster, and it is estimated that by 2050, there will be over 10 million Central Americans in urban centers. The status quo presents challenges to urban planners and policy makers. Increased migration could lead to heightened urban design pressure, and loss of workforce and residents in rural regions can further degrade local environments and ecosystems. Therefore, we propose the policy makers and international humanitarian investors to act accordingly:
-                Encourage both domestic and international investment on forest preservation and climate change mitigation; 
-                Provide funds for climate adaptation for affected population, and help reconstruct the regions damaged by natural disasters; 
-                Have increased effort in ensuring employment and food security in regions vulnerable from deforestation; 
-                Adjust urban planning policies to reflect demands induced by future increase in urban population.</h3>
-                </div>
-        </section>
-
     </div>
 </Scroller>
 

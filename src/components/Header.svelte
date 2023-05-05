@@ -50,7 +50,7 @@
         color: #eee;
     }
 
-    .paragraph {
+    :global(.paragraph) {
         width: 600px;
         margin: 100px auto;
         text-align: justify;
