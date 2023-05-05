@@ -5,8 +5,9 @@
     </div>
 </header>
 
-<div class = "paragraph">
+<div class = "paragraph" id = "intro">
     <img src={"/images/deforestation_intro.jpeg"} alt="Deforestation" />
+    <h2>Introduction</h2>
     <p>Deforestation has led to increased Central American migration rates. In the past few decades, forestry coverage in El Salvador, Guatemala and Honduras has decreased drastically, which negatively impacted residents’ livelihood, food security and their susceptibility towards natural disasters, such as floods and droughts. Regions with severe deforestation coincide with regions with high migration rates, and as livelihood and food security are commonly ranked as top motivations for migration, people living in heavily deforested locations are also more likely to migrate due to natural disasters. As more people migrate or are displaced externally or internally to urban centers, regional governments are faced with enhanced pressure with rural migrants.</p>    
 </div>
 
@@ -16,6 +17,7 @@
 		height:100vh;
         width:100vw;
         position: relative;
+        z-index: 500001;
     }
 
     header::before {

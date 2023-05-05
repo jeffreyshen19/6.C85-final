@@ -14,7 +14,10 @@
     let L; 
     let map; 
 
-    let count, index, offset, progress;
+    export let index;
+    export let progress;
+    export let offset; 
+    let count;
     let width, height;
 
     const wfpDepartments = new Set(['1184', '901730', 'GT20', '1193', 'GT12', '901742', 'GT13', '901726', 'GT16', '1197', '1185', '901732']);
@@ -406,7 +409,7 @@
     </div>
 
     <div class="foreground" slot="foreground">
-        <section> 
+        <section id="deforestation"> 
             <div class = "text">
                 The Northern Central America countries, namely Honduras, Guatemala and El Savador, used to have at least 48% of their total land area covered by forests.
             </div>
@@ -437,7 +440,7 @@
                 Alta Verapaz, Guatemala, Yoro, Honduras, and Usulutan, 
                 El Salvador are among the regions that experienced the
                  most severe deforestation. -->
-        <section>
+        <section id="food-insecurity">
             <div class = "text">
                 <h3>Deforestation & Food Security </h3>
                 Deforestation reduces the supply of clean drinking water and food for surrounding communities, which leads to food insecurity. According to studies, the highest concentrations of food insecure populations live in regions with tropical forests. Deforestation also destroys the biodiversity and fertility of the land, making it unsustainable to be a reliable food source for people nearby.
@@ -478,7 +481,7 @@
                 In summary, there is some correlation between food insecurity and deforestation, especially in Guatemala, though food insecurity is a major issue across the region, and in areas with low deforestation.
             </div>
         </section>
-        <section style="left: 5vw; width: 100vw; display: flex; align-items: center; justify-content: center;">
+        <section id="livelihood" style="left: 5vw; width: 100vw; display: flex; align-items: center; justify-content: center;">
             <div class="text" style="width: 60vw; line-height: 1.5; text-align: justify; background: rgba(255, 255, 255, .5);">
                 <h3 style="text-align: center;">Deforestation and its link to loss of livelihoods</h3>
                 One quarter of the global population relies on forest for their livelihoods, including disadvantaged communities and indigenous communities. Deforestation in Guatemala, El Salvador, and Honduras can have significant impacts on the livelihoods of people who rely on forests for their well-being and threatens the local population’s livelihoods, incentivizing many of them to seek labor somewhere else.
@@ -527,7 +530,7 @@
                 The loss of forests can have direct impacts on the availability of natural resources, such as timber and other forest products such as fruits, nuts, and medicinal products. These resources are critical for the livelihoods of people who rely on the sale of these products for their income and sustenance, and hence deforestation can directly impact the livelihoods of these people. Hover on the images below to learn more.
             </div>
         </section>
-        <section style="left: 5vw; width: 100vw; display: flex; align-items: center; justify-content: center;">
+        <section  id="natural-disasters" style="left: 5vw; width: 100vw; display: flex; align-items: center; justify-content: center;">
             <div class="text" style="width: 60vw; line-height: 1.5; text-align: justify; background: rgba(255, 255, 255, .9);">
                 <h3 style="text-align: center;">Deforestation's indirect link to loss of livelihoods through climate change</h3>
                 Deforestation is a significant source of greenhouse gas emissions, which contribute to global warming and climate change, which can in turn disrupt local weather patterns, leading to more frequent and severe natural disasters such as floods and droughts. 
@@ -551,7 +554,7 @@
                 The immediate effect of floods led to the displacement of over a million people in the period of 2008 to 2021 and the effects of floods, including the loss of property, livelihoods, and access to basic services, can be long-lasting. As a result, people may turn to external migration as their last resort for a chance to survive. 
             </div>
         </section>
-        <section>
+        <section id="migration">
             <div class = "text">
                 Survey data from the World Food Program shows that motivations related to livelihood and food security are among the top 5 of why Central Americans choose to migrate, both externally and internally. 
             </div>
@@ -577,6 +580,7 @@
         padding: 0;
         margin: 0;
         overflow-x: hidden;
+        width: 100vw;
     }
 
     :global(svelte-scroller-foreground){
@@ -587,7 +591,7 @@
         font-family: 'Source Serif Pro', serif;
     }
 
-    :global(p){
+    :global(p, a){
         font-family: Helvetica, Arial;
 		font-weight: 200;
     }
@@ -600,7 +604,7 @@
     
 
     .chartBackground{
-		background: whitesmoke;
+		/* background: whitesmoke; */
 		display:grid;
         grid-gap: 5vw;
         grid-template-columns: auto auto auto;
