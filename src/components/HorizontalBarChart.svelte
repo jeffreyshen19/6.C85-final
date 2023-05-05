@@ -3,6 +3,7 @@
     import Tooltip from "../components/Tooltip.svelte";
 
     export let title;
+    export let caption = "";
 	export let data;
     export let highlighted = [];
     $: highlightedIndexes = new Set(highlighted);
@@ -96,6 +97,7 @@
             </g>
         </svg>
     </div>
+    <p class = "caption">{caption}</p>
 </div>
 
 <Tooltip hidden={hovered == null} position={tooltipPosition}>
@@ -130,6 +132,13 @@
 		font-weight: 200;
         text-align: top;
 	}
+
+    .caption{
+        font-family: Helvetica, Arial;
+		font-weight: 200;
+        text-align: center;
+        font-size: 14px;
+    }
 
 	.tick line {
 		stroke: #e2e2e2;

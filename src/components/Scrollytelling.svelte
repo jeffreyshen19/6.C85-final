@@ -358,6 +358,7 @@
             ]}
             title="Reasons for External Migration"
             xAxisLabel="Number of Respondents"
+            caption="External migration is defined as leaving the home country for another country."
             xTicks={[0, 200, 400, 600, 800, 1000, 1200, 1400]}
             formatXTick={(d) => d.toLocaleString()}
             highlighted={[]}
@@ -380,6 +381,7 @@
                 ["Loss of land due to processes of land use change", 2],
             ]}
             title="Reasons for Internal Migration"
+            caption="Internal migration is defined as relocating from one region in the home country to another region."
             xAxisLabel="Number of Respondents"
             xTicks={[0, 200, 400, 600]}
             highlighted={[]}
