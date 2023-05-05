@@ -1,5 +1,6 @@
 <script>
     import * as d3 from "d3";
+    import Tooltip from "../components/Tooltip.svelte";
 
     export let title;
 	export let data;
@@ -26,9 +27,27 @@
 
 	const innerHeight = height - (padding.top + padding.bottom);
 	const barHeight = innerHeight / data.length - 4;
+
+    let tooltipPosition = {
+        "x": 0,
+        "y": 0
+    }
+
+    let hovered = null;
+
+    function renderTooltip(d){
+        return `
+            <p><strong>${d[0]}</strong>: ${d[1]} respondents</p>
+        `;
+    }
+
+    function mousemove(e){
+        tooltipPosition.x = e.clientX;
+        tooltipPosition.y = e.clientY;
+    }
 </script>
 
-<div class = "wrapper" style:opacity={visible ? 1 : 0}>
+<div class = "wrapper" style:opacity={visible ? 1 : 0} style:pointer-events={visible ? "all" : "none"}>
     <h2>{title}</h2>
     <div class="chart" bind:clientWidth={width} bind:clientHeight={height}>
         <svg>
@@ -68,13 +87,20 @@
                         x="{padding.left + 10}"
                         height="{barHeight}"
                         width="{xScale(point[1])}"
-                        stroke={highlightedIndexes.has(i) ? "#ede99d" : "none"} 
+                        stroke={highlightedIndexes.has(i) ? "#ede99d" : "none"}
+                        on:mouseenter={() => {hovered = point;}} 
+                        on:mousemove={mousemove} 
+                        on:mouseleave={() => {hovered = null;}} 
                     ></rect>
                 {/each}
             </g>
         </svg>
     </div>
 </div>
+
+<Tooltip hidden={hovered == null} position={tooltipPosition}>
+    {@html renderTooltip(hovered)}
+</Tooltip>
 
 <style>
 	h2 {
@@ -89,6 +115,7 @@
         width: 100%;
 		max-width: 700px;
         transition: opacity 0.4s;
+        z-index: 1000;
     }
 
 	svg {
