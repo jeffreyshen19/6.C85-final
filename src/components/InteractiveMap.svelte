@@ -10,10 +10,6 @@
     let L;
     let map;
 
-
-    // internal migration 
-    // external migration 
-
     const wfpDepartments = new Set(['1184', '901730', 'GT20', '1193', 'GT12', '901742', 'GT13', '901726', 'GT16', '1197', '1185', '901732']);
 
     onMount(async () => {
@@ -100,7 +96,7 @@
         //     "scaleLabel": "Number of Internal Migrants"
         // },
         {
-            "domain": [0, 1],
+            "domain": [0, 0.75],
             "f": (d) => parseInt(d.num_int_migrated) / parseInt(d.SURVEYED_SIZE),
             "formatDomain": (d) => isNaN(d) ? "No data" : (100 * d).toFixed(2) + "%",
             "title": "Number of Internal Migrants (Per Capita)",
@@ -114,7 +110,7 @@
         //     "scaleLabel": "Number of External Migrants"
         // },
         {
-            "domain": [0, 1],
+            "domain": [0, 0.75],
             "f": (d) => parseInt(d.num_ext_migrated)  / parseInt(d.SURVEYED_SIZE),
             "formatDomain": (d) => isNaN(d) ? "No data" : (100 * d).toFixed(2) + "%",
             "title": "Number of External Migrants (Per Capita)",
