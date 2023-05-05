@@ -97,7 +97,7 @@
     $: highlightedSet = new Set(highlighted);
 
     let colorScaleForestLoss = d3.scaleSequential(d3.interpolateReds).domain([0, 0.25]);
-    let colorScaleFoodInsecurity = d3.scaleSequential(d3.interpolateRgb("#fff", "#d33800")).domain([0, 0.75]);
+    let colorScaleFoodInsecurity = d3.scaleSequential(d3.interpolateRgb("#fff", "#5a228b")).domain([0, 0.75]);
 </script>
 
 <table style:opacity={visible ? 1 : 0}> 

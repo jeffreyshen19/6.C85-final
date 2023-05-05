@@ -60,9 +60,7 @@
     let img_intro_text = "deforestation_intro.jpeg";
 
     // Choropleth attributes 
-    const index_intro = 0;
-    const index_intro_text = index_intro + 1;
-    const index_deforestation_grid = index_intro_text + 1; // this is the starting index 
+    const index_deforestation_grid = 0; // this is the starting index 
     const index_forest_cover = index_deforestation_grid + 2; // meaning index_deforestation_grid part has two slides 
     const index_food_security = index_forest_cover + 3; 
     const index_table = index_food_security + 3;
@@ -92,7 +90,7 @@
     choropleths[index_food_security] = choropleths[index_forest_cover + 2];
     choropleths[index_food_security + 1] = choropleths[index_forest_cover + 2];
     choropleths[index_food_security + 2] = {
-        "colorScale": d3.scaleSequential(d3.interpolateRgb("#fff", "#d33800")),
+        "colorScale": d3.scaleSequential(d3.interpolateRgb("#fff", "#5a228b")),
         "f": (d) => d.FOOD_INSECURITY_COUNT/ d.SURVEYED_SIZE,
         "domain": [0, 0.75],
         "formatDomain": (d) => (100 * d).toFixed(2) + "%",
@@ -128,15 +126,6 @@
             <p>total progress</p>
             <progress value={progress || 0} />
         </div> -->
-
-        <div class="chartBackground" style:opacity={index == index_intro ? 1 : 0}>
-            <img src={img_intro_src} alt="Deforestation in Honduras" class="image" />
-        </div>
-
-        <div class="chartBackground" style:opacity={index == index_intro_text ? 1 : 0}>
-            <!-- svelte-ignore a11y-img-redundant-alt -->
-            <img src={"/images/deforestation_intro.jpeg"} alt="Deforestation background image" class="image" />
-        </div>
 
         <div class="chartBackground" style:opacity={index == index_deforestation_grid ? 1 : 0}>
             <div class="countryName" style="position: fixed; top: 5vh; left: 25vw; z-index: 99; color: #588157;">
@@ -417,14 +406,6 @@
     </div>
 
     <div class="foreground" slot="foreground">
-        <section class = "title"> 
-            <h1>THE IMPACT OF DEFORESTATION ON CENTRAL AMERICA MIGRATION</h1>
-        </section>
-        <section class = "title">
-            <div class = "text">
-            <h2>Deforestation has led to increased Central American migration rates. In the past few decades, forestry coverage in El Salvador, Guatemala and Honduras has decreased drastically, which negatively impacted residents’ livelihood, food security and their susceptibility towards natural disasters, such as floods and droughts. Regions with severe deforestation coincide with regions with high migration rates, and as livelihood and food security are commonly ranked as top motivations for migration, people living in heavily deforested locations are also more likely to migrate due to natural disasters. As more people migrate or are displaced externally or internally to urban centers, regional governments are faced with enhanced pressure with rural migrants.</h2>
-            </div>
-        </section>
         <section> 
             <div class = "text">
                 The Northern Central America countries, namely Honduras, Guatemala and El Savador, used to have at least 48% of their total land area covered by forests.
@@ -618,7 +599,8 @@
     }
 
     :global(p){
-        font-family: 'IBM Plex Sans', sans-serif;
+        font-family: Helvetica, Arial;
+		font-weight: 200;
     }
 
     .background {
@@ -690,12 +672,6 @@
     .text h3{
         margin: 0;
         margin-bottom: 5px;
-    }
-
-    h1 {
-        font-size: 3em;
-        width: 60vw;
-        line-height: 1.5;
     }
 
     .title {

@@ -7,7 +7,9 @@
 <script>
     import Scrollytelling from "../components/Scrollytelling.svelte";
     import InteractiveMap from "../components/InteractiveMap.svelte";
+    import Header from "../components/Header.svelte";
 </script>
 
+<Header/>
 <Scrollytelling/>
 <InteractiveMap/>

@@ -123,7 +123,7 @@
 
 <style>
     :global(.leaflet-interactive){
-        transition: fill-opacity 1s, stroke-opacity 1s;
+        transition: fill-color 1s, fill-opacity 1s, stroke-opacity 1s;
     }
 
     .scale{

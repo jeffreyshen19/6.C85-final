@@ -159,7 +159,7 @@
 	}
 
 	.bars rect {
-		fill: #a11;
+		fill: #284387;
         stroke-width: 3;
 		opacity: 0.65;
 	}
