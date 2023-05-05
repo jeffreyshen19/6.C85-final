@@ -17,23 +17,6 @@
     let count, index, offset, progress;
     let width, height;
 
-    // let forest_loss = {};
-
-    // departments.features.forEach((d) => {
-    //     forest_loss[d.properties.department_id] = d.properties.LOSS_10_YE / d.properties.COVER_2000
-    // });
-    // console.log(forest_loss);
-    // let countries = [];
-    // console.log(fi_departments.features.map((d) => {
-    //     return {
-    //         "department_id": d.properties.department_id,
-    //         "country": d.properties.country,
-    //         "department_name": d.properties.department_name,
-    //         "food_insecurity": d.properties.FOOD_INSECURITY_COUNT/ d.properties.SURVEYED_SIZE,
-    //         "forest_loss": forest_loss[d.properties.department_id]
-    //     }
-    // }).filter((d) => !isNaN(d.food_insecurity)));
-
     const wfpDepartments = new Set(['1184', '901730', 'GT20', '1193', 'GT12', '901742', 'GT13', '901726', 'GT16', '1197', '1185', '901732']);
 
     const GTlist=Array(100).fill().map((_,i)=>{
@@ -76,7 +59,7 @@
     let img_livelihood = "images/livelihood.jpg";
     let img_intro_text = "deforestation_intro.jpeg";
 
-    // update indices for scrolling here 
+    // Choropleth attributes 
     const index_intro = 0;
     const index_intro_text = index_intro + 1;
     const index_deforestation_grid = index_intro_text + 1; // this is the starting index 
@@ -86,6 +69,37 @@
     const index_livelihood = index_table + 5;
     const index_migration = index_livelihood + 6;
     const index_conclusion = index_migration + 1;
+
+    let choropleths = {};
+    choropleths[index_forest_cover + 1] = {
+        "colorScale": d3.scaleSequential(d3.interpolateGreens),
+        "f": (d) => d.COVER_2000 / d.TOTAL_SQUA,
+        "domain": [0, 1],
+        "formatDomain": (d) => (100 * d).toFixed(2) + "%",
+        "scaleLabel": "% Tree Cover (2000)",
+        "highlight": (d) => true,
+        "renderTooltip": (d) => `<h1>${d.department_name}, ${d.country}</h1><p>Tree Cover (2000): ${(d.COVER_2000 / d.TOTAL_SQUA * 100).toFixed(2)}%</p>`
+    };
+    choropleths[index_forest_cover + 2] = {
+        "colorScale": d3.scaleSequential(d3.interpolateReds),
+        "f": (d) => d.LOSS_10_YE / d.COVER_2000,
+        "domain": [0, 0.25],
+        "formatDomain": (d) => (100 * d).toFixed(2) + "%",
+        "scaleLabel": "Forest Cover Loss (2012-2021)",
+        "highlight": (d) => index <= index_food_security || wfpDepartments.has(d.department_id),
+        "renderTooltip": (d) => `<h1>${d.department_name}, ${d.country}</h1><p>Forest Cover Loss (2012-2021): ${(d.LOSS_10_YE / d.COVER_2000 * 100).toFixed(2)}%</p>`
+    };
+    choropleths[index_food_security] = choropleths[index_forest_cover + 2];
+    choropleths[index_food_security + 1] = choropleths[index_forest_cover + 2];
+    choropleths[index_food_security + 2] = {
+        "colorScale": d3.scaleSequential(d3.interpolateRgb("#fff", "#d33800")),
+        "f": (d) => d.FOOD_INSECURITY_COUNT/ d.SURVEYED_SIZE,
+        "domain": [0, 0.75],
+        "formatDomain": (d) => (100 * d).toFixed(2) + "%",
+        "scaleLabel": "Food insecurity (%)",
+        "highlight": (d) => wfpDepartments.has(d.department_id),
+        "renderTooltip": (d) => `<h1>${d.department_name}, ${d.country}</h1><p>% of population facing food insecurity: ${!wfpDepartments.has(d.department_id) ? "No data" : (d.FOOD_INSECURITY_COUNT/ d.SURVEYED_SIZE * 100).toFixed(2) + "%"}</p>`
+    };
 </script>
 
 
@@ -226,43 +240,13 @@
             visible={index == index_forest_cover}
             bounds={[[17.8292499999999983, -92.25], [12.971, -83.14575]]}
         />
+
         <Choropleth 
-            visible={index == index_forest_cover + 1}
-            domain={[0, 1]}
             {L} 
             {map} 
             data={departments} 
-            colorScale={d3.scaleSequential(d3.interpolateGreens)}
-            f={(d) => d.COVER_2000 / d.TOTAL_SQUA}
-            formatDomain={(d) => (100 * d).toFixed(2) + "%"}
-            scaleLabel="% Tree Cover (2000)"
-            renderTooltip = {(d) => `<h1>${d.department_name}, ${d.country}</h1><p>Tree Cover (2000): ${(d.COVER_2000 / d.TOTAL_SQUA * 100).toFixed(2)}%</p>`}
-        />
-        <Choropleth 
-            visible={index >= index_forest_cover + 2 && index <= index_food_security + 1}
-            {L} 
-            {map} 
-            data={departments} 
-            domain={[0, 0.25]}
-            colorScale={d3.scaleSequential(d3.interpolateReds)}
-            f={(d) => d.LOSS_10_YE / d.COVER_2000}
-            formatDomain={(d) => (100 * d).toFixed(2) + "%"}
-            scaleLabel="Forest Cover Loss (2012-2021)"
-            highlight={(d) => index <= index_food_security || wfpDepartments.has(d.department_id)}
-            renderTooltip = {(d) => `<h1>${d.department_name}, ${d.country}</h1><p>Forest Cover Loss (2012-2021): ${(d.LOSS_10_YE / d.COVER_2000 * 100).toFixed(2)}%</p>`}
-        />
-        <Choropleth 
-            visible={index == index_food_security + 2}
-            {L} 
-            {map} 
-            data={departments} 
-            domain={[0, 0.75]}
-            colorScale={d3.scaleSequential(d3.interpolateRgb("#fff", "#d33800"))}
-            f={(d) => d.FOOD_INSECURITY_COUNT/ d.SURVEYED_SIZE}
-            formatDomain={(d) => (100 * d).toFixed(2) + "%"}
-            scaleLabel="Food insecurity (%)"
-            highlight={(d) => wfpDepartments.has(d.department_id)}
-            renderTooltip = {(d) => `<h1>${d.department_name}, ${d.country}</h1><p>% of population facing food insecurity: ${(d.FOOD_INSECURITY_COUNT/ d.SURVEYED_SIZE * 100).toFixed(2)}%</p>`}
+            visible={index > index_forest_cover && index < index_table} 
+            {...(index in choropleths ? choropleths[index] : choropleths[index <= index_forest_cover ? index_forest_cover + 1: index_table - 1])}       
         />
 
         <Table 
@@ -519,7 +503,7 @@
                 Deforestation can directly cause loss of livelihoods due to impact on industries relying on the forests and indirectly through other consequences of deforestation such as soil erosion and climate change consequences.
             </div>
         </section>
-        <section style="width: 100vw;height: 100vh;left: 3vw;display: flex; justify-content: center; align-items: center;">
+        <section style="pointer-events:all;width: 100vw;height: 100vh;left: 3vw;display: flex; justify-content: center; align-items: center;">
             <div style="width: 100vw; display: flex; align-items: center; justify-content: center;">
                 <div class = container>
                     <div class = card>
@@ -621,6 +605,10 @@
         padding: 0;
         margin: 0;
         overflow-x: hidden;
+    }
+
+    :global(svelte-scroller-foreground){
+        pointer-events: none;
     }
 
     :global(h1, h2, h3, h4, h5, h6){

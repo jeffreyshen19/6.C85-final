@@ -65,8 +65,8 @@
         if(choroplethLayer) choroplethLayer.setStyle((feature) => {
             return {
                 fillColor: colorScale(f(feature.properties)),
-                opacity: visible && highlight(feature.properties) ? 1 : 0,
-                fillOpacity: visible ? (highlight(feature.properties) ? 0.9 : 0.02) : 0,
+                opacity: visible && highlight && highlight(feature.properties) ? 1 : 0,
+                fillOpacity: visible ? (highlight && highlight(feature.properties) ? 0.9 : 0.02) : 0,
             }
         })
     }
@@ -104,7 +104,7 @@
 
 </script>
 
-<Tooltip hidden={hovered==null} position={tooltipPosition}>
+<Tooltip hidden={hovered==null || !visible} position={tooltipPosition}>
     {@html renderTooltip(hovered)}
 </Tooltip>
 
