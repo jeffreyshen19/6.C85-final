@@ -140,6 +140,7 @@
 </script>
 
 <div id = "wrapper">
+    <div id = "title"><h1>Explore the Data:</h1></div>
     <div id = "interactive-map"></div>
     <div id = "dropdowns">
 
@@ -210,6 +211,13 @@
         z-index: 500;
         top: 15px; 
         right: 15px;
+    }
+
+    #title{
+        position: absolute;
+        z-index: 500;
+        top: 0px; 
+        left: 30px;
     }
 
     .dropdown{
