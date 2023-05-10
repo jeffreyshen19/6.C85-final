@@ -209,15 +209,15 @@
     #dropdowns{
         position: absolute;
         z-index: 500;
-        top: 15px; 
+        top: 50px; 
         right: 15px;
     }
 
     #title{
         position: absolute;
         z-index: 500;
-        top: 0px; 
-        left: 30px;
+        top: 35px; 
+        left: 20px;
     }
 
     .dropdown{
