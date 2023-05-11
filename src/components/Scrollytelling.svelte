@@ -8,6 +8,7 @@
     import Table from "./Table.svelte";
     import GridItem from "./GridItem.svelte";
     import departments from "../geojson/departments.json";
+    import countries from "../geojson/countries.json";
     import Scroller from "@sveltejs/svelte-scroller";
     import * as d3 from "d3";
 
@@ -101,6 +102,26 @@
         "highlight": (d) => wfpDepartments.has(d.department_id),
         "renderTooltip": (d) => `<h1>${d.department_name}, ${d.country}</h1><p>% of population facing food insecurity: ${!wfpDepartments.has(d.department_id) ? "No data" : (d.FOOD_INSECURITY_COUNT/ d.SURVEYED_SIZE * 100).toFixed(2) + "%"}</p>`
     };
+
+    let numFloodMap = {
+        "colorScale": d3.scaleSequential(d3.interpolateBlues),
+        "f": (d) => d.FLOOD_NUM,
+        "domain": [0, 30], 
+        "formatDomain":  (d) => d, 
+        "scaleLabel": "Number of floods from 2008 - 2021",
+        "highlight": (d) => true, 
+        "renderTooltip": (d) => `<h1>${d.COUNTRY}</h1>\nNumber of floods from 2008 - 2021: ${d.FLOOD_NUM}`
+    }
+
+    let displacementFloodMap = {
+        "colorScale": d3.scaleSequential(d3.interpolateBlues),
+        "f": (d) => d.DISPLACED,
+        "domain": [0, 200000], 
+        "formatDomain":  (d) => d, 
+        "scaleLabel": "Number of people displaced by floods from 2008 - 2021",
+        "highlight": (d) => true, 
+        "renderTooltip": (d) => `<h1>${d.COUNTRY}</h1>\nNumber of people displaced by floods (2008 - 2021): ${d.DISPLACED}`
+    }
 </script>
 
 
@@ -223,7 +244,7 @@
 
         <Basemap 
             bind:L={L} bind:map={map}
-            visible={(index < index_table && index >= index_forest_cover)}
+            visible={(index < index_table && index >= index_forest_cover) || (index == index_livelihood + 4) || (index == index_livelihood + 5)}
         />
         <Raster
             {L}
@@ -309,23 +330,13 @@
             </div>
         </div>
 
-        <div class="chartBackground" style:opacity={index == index_livelihood + 4 ? 1 : 0}>
-            <div class="countryName" style="position: fixed; top: 5vh; left: 25vw; z-index: 99; color: #86bbd8;">
-                Number of floods from 2008 -  2021
-            </div>
-            <div style="position: fixed; top: 15vh; left: 5vw; z-index: 99;">
-               <img style="width: 60vw;" src="/images/countrymap.png" alt="Map showing number of floods in Guatemala (27), Honduras (28) and El Salvador (19) from 2008 to 2021)">
-            </div>
-        </div>
-
-        <div class="chartBackground" style:opacity={index == index_livelihood + 5 ? 1 : 0}>
-            <div class="countryName" style="position: fixed; top: 5vh; left: 25vw; z-index: 99; color: #86bbd8;">
-                Number of people displaced by floods from 2008 -  2021
-            </div>
-            <div style="position: fixed; top: 15vh; left: 5vw; z-index: 99;">
-               <img style="width: 60vw;" src="/images/flood_displacement.png" alt="Map showing people displaced by floods in Guatemala (170437), Honduras (96033) and El Salvador (5708) from 2008 to 2021)">
-            </div>
-        </div>
+        <Choropleth 
+            {L} 
+            {map} 
+            data={countries} 
+            visible={index  == index_livelihood + 4 || index  == index_livelihood + 5} 
+            {...(index  == index_livelihood + 4 ? numFloodMap : displacementFloodMap)}       
+        />
         
         <HorizontalBarChart 
             visible={index == index_migration}
@@ -542,8 +553,8 @@
                 The agriculture, forestry, and fishing industries in Guatemala, El Salvador, and Honduras provide income and food for millions of people in the region, but they are also highly vulnerable to the impacts of deforestation and climate change. Rising temperatures, changes in precipitation patterns, and more frequent extreme weather events such as floods and droughts are already affecting these industries, leading to crop failures, reduced yields, and damage to infrastructure.
             </div>
         </section>
-        <section style="width: 100vw; display: flex; align-items: center; justify-content: end;">
-            <div class = "text" style="line-height: 1.5; width: 30vw;">
+        <section>
+            <div class = "text">
                 <h3>Deforestation and Flooding </h3>
                 Deforestation reduces the soil's ability to absorb and store water, leading to rapid runoff during heavy rains and increasing the risk of flooding. Trees also play a critical role in intercepting rainfall and reducing the impact of raindrops on the soil, and their removal can exacerbate soil compaction and reduce the water storage capacity in the landscape. 
                 The loss of trees also makes hillsides and slopes more vulnerable to erosion and landslides, leading to blockages in rivers and streams that increase the risk of flooding.
