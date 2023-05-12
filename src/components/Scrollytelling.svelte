@@ -152,6 +152,26 @@
             <progress value={progress || 0} />
         </div>
 
+        <p class = "attribution">
+            {#if index <= 2}
+                Forest cover data from <a href = "https://data.globalforestwatch.org/documents/a400422d410b4c158f499b5dbf7a7c66/explore">Global Forest Watch</a>.
+            {:else if index <= 11}
+                Forest cover data from <a href = "https://data.globalforestwatch.org/documents/a400422d410b4c158f499b5dbf7a7c66/explore">Global Forest Watch</a>. Food insecurity data from the World Food Program.
+            {:else if index == 19 || index == 18}
+                Data from the <a href = "https://www.fao.org/faostat/en/#data/WCAD">Food and Agriculture Organization of the United Nations</a>. 
+            {/if}
+        </p>
+
+        <p class = "map-attribution">
+            {#if index >= 2 && index < 7}
+                Forest cover data from <a href = "https://data.globalforestwatch.org/documents/a400422d410b4c158f499b5dbf7a7c66/explore">Global Forest Watch</a>.
+            {:else if index == 7}
+                Forest cover data from <a href = "https://data.globalforestwatch.org/documents/a400422d410b4c158f499b5dbf7a7c66/explore">Global Forest Watch</a>. Food insecurity data from the World Food Program.
+            {:else if index == 19 || index == 20}
+                Data from the <a href = "https://www.internal-displacement.org/database/displacement-data">Global Internal Displacement Database</a>.
+            {/if}
+        </p>
+
         <div class="chartBackground" style:opacity={index == index_deforestation_grid ? 1 : 0}>
             <div class="countryName" style="position: fixed; top: 5vh; left: 25vw; z-index: 99; color: #588157;">
                 Forest cover (%) in 2000
@@ -353,7 +373,7 @@
             ]}
             title="Reasons for External Migration"
             xAxisLabel="Number of Respondents"
-            caption="External migration is defined as leaving the home country for another country."
+            caption="External migration is defined as leaving the home country for another country. Data from the World Food Program."
             xTicks={[0, 200, 400, 600, 800, 1000, 1200, 1400]}
             formatXTick={(d) => d.toLocaleString()}
             highlighted={[]}
@@ -376,7 +396,7 @@
                 ["Loss of land due to processes of land use change", 2],
             ]}
             title="Reasons for Internal Migration"
-            caption="Internal migration is defined as relocating from one region in the home country to another region."
+            caption="Internal migration is defined as relocating from one region in the home country to another region. Data from the World Food Program."
             xAxisLabel="Number of Respondents"
             xTicks={[0, 200, 400, 600]}
             highlighted={[]}
@@ -583,12 +603,32 @@
 
 
 <style>
+
     * { 
         margin : 0;
         padding: 0;
         box-sizing : border-box;
     }
 
+    .attribution{
+        position: absolute;
+        bottom: 15px;
+        left: 15px;
+        font-size: 0.9em;
+    }
+
+    .attribution a, .map-attribution a{
+        color: #524eb7;
+        text-decoration: none;
+    }
+
+    .map-attribution{
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        font-size: 10px;
+        z-index: 100000;
+    }
 
     :global(body){
         padding: 0;

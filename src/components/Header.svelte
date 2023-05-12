@@ -5,13 +5,28 @@
     </div>
 </header>
 
+<p class = "attribution">Image courtesy of <a href = "https://news.mongabay.com/2019/04/indigenous-leaders-decry-colombias-deadly-crackdown-on-land-protesters/"><i>Mongabay</i></a>.</p>
+
 <div class = "paragraph" id = "intro">
     <img src={"/images/deforestation_intro.jpeg"} alt="Deforestation" />
+    <p style:font-size="0.8em" style:text-align="right" style:margin-bottom="0.5em">Douglas Magno/AFP/Getty Images</p>
     <h2>Introduction</h2>
     <p>Deforestation has led to increased Central American migration rates. In the past few decades, forestry coverage in El Salvador, Guatemala and Honduras has decreased drastically, which negatively impacted residents’ livelihood, food security and their susceptibility towards natural disasters, such as floods and droughts. Regions with severe deforestation coincide with regions with high migration rates, and as livelihood and food security are commonly ranked as top motivations for migration, people living in heavily deforested locations are also more likely to migrate due to natural disasters. As more people migrate or are displaced externally or internally to urban centers, regional governments are faced with enhanced pressure with rural migrants.</p>    
+    <br>
+    <p><i>This data visualization was made with data contributed by the United Nations World Food Programme (WFP).</i></p>
 </div>
 
 <style>
+
+    .attribution{
+        text-align: right;
+        padding: 5px 10px;
+    }
+
+    .attribution a{
+        color: #524eb7;
+        text-decoration: none;
+    }
 
     header{
 		height:100vh;
@@ -62,6 +77,6 @@
 
     .paragraph img{
         width: 100%;
-        margin-bottom: 1em;
+        margin-bottom: 0em;
     }
 </style>

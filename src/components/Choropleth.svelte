@@ -129,7 +129,7 @@
     .scale{
         position: absolute;
         z-index: 1000;
-        bottom: 10px;
+        bottom: 28px;
         left: 10px;
         transition: 1s all;
     }
