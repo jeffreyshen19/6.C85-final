@@ -254,14 +254,23 @@
             visible={index == index_forest_cover}
             bounds={[[17.8292499999999983, -92.25], [12.971, -83.14575]]}
         />
-
+        <Choropleth 
+            {L} 
+            {map} 
+            data={countries} 
+            visible={index == index_natural_disaster + 2 || index  == index_natural_disaster + 3} 
+            {...(index == index_natural_disaster + 2 ? numFloodMap : displacementFloodMap)}       
+        />
         <Choropleth 
             {L} 
             {map} 
             data={departments} 
-            visible={index > index_forest_cover && index < index_table} 
+            visible={(index > index_forest_cover && index < index_table)} 
             {...(index in choropleths ? choropleths[index] : choropleths[index <= index_forest_cover ? index_forest_cover + 1: index_table - 1])}       
         />
+
+        
+        
 
         <Table 
             visible={index >= index_table && index <= index_table + 4}
@@ -319,13 +328,7 @@
             </div>
         </div>
 
-        <Choropleth 
-            {L} 
-            {map} 
-            data={countries} 
-            visible={index  == index_natural_disaster + 2 || index  == index_natural_disaster + 3} 
-            {...(index  == index_natural_disaster + 2 ? numFloodMap : displacementFloodMap)}       
-        />
+        
         
         <HorizontalBarChart 
             visible={index == index_migration}
