@@ -25,7 +25,7 @@
         position: absolute;
         top: 0; left: 0;
         width: 100%; height: 100%;
-        background-image: url("images/intro.jpg");
+        background-image: url("/images/intro.jpg");
         filter: grayscale(70%) brightness(0.7);
     }
 
