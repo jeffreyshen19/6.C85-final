@@ -451,7 +451,7 @@
         </section>
         <section>
             <div class = "text">
-                To better understand the relationship between deforestation and food security, we reference survey data from the World Food Program. The survey was only conducted in a few departments in each country, highlighted here. 
+                To better understand the relationship between deforestation and food security, we reference survey data from the World Food Program. The survey was only conducted in a few departments in each country, highlighted here. For our visualization, we define food insecure households as those who answered the following when asked if they had money for food in the last 30 days: "Sometimes enough", "Rarely enough", "Insufficient".
             </div>
         </section>
         <section>
@@ -486,7 +486,7 @@
         </section>
         <section>
         </section>
-        <section style="top: -70vh; left: 5vw; width: 100vw; display:flex; justify-content: center; background: white;">
+        <section id = "livelihood" style="top: -70vh; left: 5vw; width: 100vw; display:flex; justify-content: center; background: white;">
             <div class = "paragraph">
                 <img src="images/forest.jpg" style="width: 600px" alt="Forest in Honduras">
                 <br><br>
