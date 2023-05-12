@@ -69,7 +69,8 @@
     const index_food_security = index_forest_cover + 3; 
     const index_table = index_food_security + 3;
     const index_livelihood = index_table + 5;
-    const index_migration = index_livelihood + 6;
+    const index_natural_disaster = index_livelihood + 4; 
+    const index_migration = index_natural_disaster + 4;
     const index_conclusion = index_migration + 1;
 
     let choropleths = {};
@@ -140,7 +141,7 @@
         bind:clientWidth={width}
         bind:clientHeight={height}
     >
-        <!-- <div class="progress-bars">
+        <div class="progress-bars">
             <p>current section: <strong>{index + 1}/{count}</strong></p>
             <progress value={count ? (index + 1) / count : 0} />
 
@@ -149,7 +150,7 @@
 
             <p>total progress</p>
             <progress value={progress || 0} />
-        </div> -->
+        </div>
 
         <div class="chartBackground" style:opacity={index == index_deforestation_grid ? 1 : 0}>
             <div class="countryName" style="position: fixed; top: 5vh; left: 25vw; z-index: 99; color: #588157;">
@@ -244,7 +245,7 @@
 
         <Basemap 
             bind:L={L} bind:map={map}
-            visible={(index < index_table && index >= index_forest_cover) || (index == index_livelihood + 4) || (index == index_livelihood + 5)}
+            visible={(index < index_table && index >= index_forest_cover) || (index == index_natural_disaster + 2) || (index == index_natural_disaster + 3)}
         />
         <Raster
             {L}
@@ -271,19 +272,7 @@
             }
         />
 
-        <div style:opacity={index == index_livelihood ? 1 : 0} style="position: fixed; top: 0; width: 100vw; height: 100vh; transition: opacity 0.4s; align-content: center">
-            <img src="/images/forest.jpg" alt="Forest in Honduras" style="width: 100vw;" />
-        </div>
-
-        <div style:opacity={index == index_livelihood + 1 ? 1 : 0} style="position: fixed; top: 0; width: 100vw; height: 100vh; transition: opacity 0.4s; align-content: center">
-            <img src="/images/forest.jpg" alt="Forest in Honduras" style="width: 100vw;" class="image" />
-        </div>
-
-        <div style:opacity={index == index_livelihood + 2 ? 1 : 0} style="position: fixed; top: 0; width: 100vw; height: 100vh; transition: opacity 0.4s; align-content: center">
-            <img src="/images/flood.jpg" alt="Aerial footage of Iota flood devastation in Honduras" style="width: 100vw;"/>
-        </div>
-
-        <div class="chartBackground" style:opacity={index == index_livelihood + 3 ? 1 : 0}>
+        <div class="chartBackground" style:opacity={index == index_natural_disaster + 1 ? 1 : 0}>
             <div class="countryName" style="position: fixed; top: 5vh; left: 8vw; z-index: 99; color: #588157;">
                 Share of employment in agriculture, forestry and fishing (%) in 2021
             </div>
@@ -334,8 +323,8 @@
             {L} 
             {map} 
             data={countries} 
-            visible={index  == index_livelihood + 4 || index  == index_livelihood + 5} 
-            {...(index  == index_livelihood + 4 ? numFloodMap : displacementFloodMap)}       
+            visible={index  == index_natural_disaster + 2 || index  == index_natural_disaster + 3} 
+            {...(index  == index_natural_disaster + 2 ? numFloodMap : displacementFloodMap)}       
         />
         
         <HorizontalBarChart 
@@ -492,15 +481,28 @@
                 In summary, there is some correlation between food insecurity and deforestation, especially in Guatemala, though food insecurity is a major issue across the region, and in areas with low deforestation.
             </div>
         </section>
-        <section id="livelihood" style="left: 5vw; width: 100vw; display: flex; align-items: center; justify-content: center;">
-            <div class="text" style="width: 60vw; line-height: 1.5; text-align: justify; background: rgba(255, 255, 255, .5);">
+        <section>
+        </section>
+        <section style="top: -70vh; left: 5vw; width: 100vw; display:flex; justify-content: center; background: white;">
+            <div class = "paragraph">
+                <img src="images/forest.jpg" style="width: 600px" alt="Forest in Honduras">
+                <br><br>
                 <h3 style="text-align: center;">Deforestation and its link to loss of livelihoods</h3>
+                <br><br>
                 One quarter of the global population relies on forest for their livelihoods, including disadvantaged communities and indigenous communities. Deforestation in Guatemala, El Salvador, and Honduras can have significant impacts on the livelihoods of people who rely on forests for their well-being and threatens the local population’s livelihoods, incentivizing many of them to seek labor somewhere else.
                 <br><br>
                 Deforestation can directly cause loss of livelihoods due to impact on industries relying on the forests and indirectly through other consequences of deforestation such as soil erosion and climate change consequences.
             </div>
         </section>
-        <section style="pointer-events:all;width: 100vw;height: 100vh;left: 3vw;display: flex; justify-content: center; align-items: center;">
+
+        <section style="left: 5vw; width: 100vw; display:flex; justify-content: center;">
+            <div class = "paragraph">
+                <h3 style="text-align: center;">Deforestation's direct link to loss of livelihoods</h3><br><br>
+                The loss of forests can have direct impacts on the availability of natural resources, such as timber and other forest products such as fruits, nuts, and medicinal products. These resources are critical for the livelihoods of people who rely on the sale of these products for their income and sustenance, and hence deforestation can directly impact the livelihoods of these people. Hover on the images below to learn more.
+            </div>
+        </section>
+        
+        <section style="pointer-events:all; width: 100vw;height: 100vh; top: -30vw; left: 3vw;display: flex; justify-content: center; align-items: center;">
             <div style="width: 100vw; display: flex; align-items: center; justify-content: center;">
                 <div class = container>
                     <div class = card>
@@ -536,14 +538,12 @@
                     </div>    
                 </div>
             </div>
-            <div class = "text" style="width: 60vw; line-height: 1.5; text-align: justify; background: rgba(255, 255, 255, 0.5); top: 12vh;">
-                <h3 style="text-align: center;">Deforestation's direct link to loss of livelihoods</h3>
-                The loss of forests can have direct impacts on the availability of natural resources, such as timber and other forest products such as fruits, nuts, and medicinal products. These resources are critical for the livelihoods of people who rely on the sale of these products for their income and sustenance, and hence deforestation can directly impact the livelihoods of these people. Hover on the images below to learn more.
-            </div>
         </section>
-        <section  id="natural-disasters" style="left: 5vw; width: 100vw; display: flex; align-items: center; justify-content: center;">
-            <div class="text" style="width: 60vw; line-height: 1.5; text-align: justify; background: rgba(255, 255, 255, .9);">
-                <h3 style="text-align: center;">Deforestation's indirect link to loss of livelihoods through climate change</h3>
+        <section id="natural-disasters" style="top: -70vh; left: 5vw; width: 100vw; display:flex; justify-content: center; background: white;">
+            <div class="paragraph">
+                <img src="images/flood.jpg" style="width: 600px" alt="Flood in Honduras">
+                <br><br>
+                <h3 style="text-align: center;">Deforestation's indirect link to loss of livelihoods through climate change</h3> <br>
                 Deforestation is a significant source of greenhouse gas emissions, which contribute to global warming and climate change, which can in turn disrupt local weather patterns, leading to more frequent and severe natural disasters such as floods and droughts. 
             </div>
         </section>

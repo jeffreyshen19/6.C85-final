@@ -14,9 +14,9 @@
     <a style:font-weight={progress <= 0 ? "bold" : 200} href = "#intro">Intro</a>    
     <a style:font-weight={progress > 0 && index < 5 ? "bold" : 200} href = "#deforestation">Deforestation</a>
     <a style:font-weight={index >= 5 && index < 13 ? "bold" : 200} href = "#food-insecurity">Food Insecurity</a>
-    <a style:font-weight={index >= 13 && index < 15 ? "bold" : 200} href = "#livelihood">Livelihood</a>
-    <a style:font-weight={index >= 15 && index < 19 ? "bold" : 200} href = "#natural-disasters">Natural Disasters</a>
-    <a style:font-weight={index >= 19 && progress < 1 ? "bold" : 200} href = "#migration">Migration</a>
+    <a style:font-weight={index >= 13 && index < 16 ? "bold" : 200} href = "#livelihood">Livelihood</a>
+    <a style:font-weight={index >= 16 && index < 21 ? "bold" : 200} href = "#natural-disasters">Natural Disasters</a>
+    <a style:font-weight={index >= 21 && progress < 1 ? "bold" : 200} href = "#migration">Migration</a>
     <a style:font-weight={progress >= 1 && progress < 1.1? "bold" : 200} href = "#conclusion">Conclusion</a>
     <a style:font-weight={progress >= 1.1? "bold" : 200} href = "#interactive-map">Interactive Map</a>
 </nav>
