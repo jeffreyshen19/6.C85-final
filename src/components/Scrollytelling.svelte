@@ -141,7 +141,7 @@
         bind:clientWidth={width}
         bind:clientHeight={height}
     >
-        <div class="progress-bars">
+        <!-- <div class="progress-bars">
             <p>current section: <strong>{index + 1}/{count}</strong></p>
             <progress value={count ? (index + 1) / count : 0} />
 
@@ -150,14 +150,14 @@
 
             <p>total progress</p>
             <progress value={progress || 0} />
-        </div>
+        </div> -->
 
         <p class = "attribution">
             {#if index <= 2}
                 Forest cover data from <a href = "https://data.globalforestwatch.org/documents/a400422d410b4c158f499b5dbf7a7c66/explore">Global Forest Watch</a>.
             {:else if index <= 11}
                 Forest cover data from <a href = "https://data.globalforestwatch.org/documents/a400422d410b4c158f499b5dbf7a7c66/explore">Global Forest Watch</a>. Food insecurity data from the World Food Program.
-            {:else if index == 19 || index == 18}
+            {:else if index == 18}
                 Data from the <a href = "https://www.fao.org/faostat/en/#data/WCAD">Food and Agriculture Organization of the United Nations</a>. 
             {/if}
         </p>
@@ -265,7 +265,7 @@
 
         <Basemap 
             bind:L={L} bind:map={map}
-            visible={(index < index_table && index >= index_forest_cover) || (index == index_natural_disaster + 2) || (index == index_natural_disaster + 3)}
+            visible={(index < index_table && index >= index_forest_cover)}
         />
         <Raster
             {L}
@@ -274,13 +274,24 @@
             visible={index == index_forest_cover}
             bounds={[[17.8292499999999983, -92.25], [12.971, -83.14575]]}
         />
-        <Choropleth 
-            {L} 
-            {map} 
-            data={countries} 
-            visible={index == index_natural_disaster + 2 || index  == index_natural_disaster + 3} 
-            {...(index == index_natural_disaster + 2 ? numFloodMap : displacementFloodMap)}       
-        />
+        <div class="chartBackground" style:opacity={index == index_natural_disaster + 2 ? 1 : 0}>
+            <div class="countryName" style="position: fixed; top: 5vh; left: 25vw; z-index: 99; color: #86bbd8;">
+                Number of floods from 2008 -  2021
+            </div>
+            <div style="position: fixed; top: 15vh; left: 5vw; z-index: 99;">
+               <img style="width: 60vw;" src="/images/countrymap.png" alt="Map showing number of floods in Guatemala (27), Honduras (28) and El Salvador (19) from 2008 to 2021)">
+            </div>
+        </div>
+
+        <div class="chartBackground" style:opacity={index  == index_natural_disaster + 3 ? 1 : 0}>
+            <div class="countryName" style="position: fixed; top: 5vh; left: 25vw; z-index: 99; color: #86bbd8;">
+                Number of people displaced by floods from 2008 -  2021
+            </div>
+            <div style="position: fixed; top: 15vh; left: 5vw; z-index: 99;">
+               <img style="width: 60vw;" src="/images/flood_displacement.png" alt="Map showing people displaced by floods in Guatemala (170437), Honduras (96033) and El Salvador (5708) from 2008 to 2021)">
+            </div>
+        </div>
+
         <Choropleth 
             {L} 
             {map} 
